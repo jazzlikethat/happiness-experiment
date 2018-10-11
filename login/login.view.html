@@ -1,0 +1,18 @@
+﻿<div class="login">
+    <form class="form-signin" name="form" ng-submit="vm.login()" role="form">
+        <!-- TODO company logo -->
+        <!-- <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> -->
+        <h1 class="h3 mb-3 font-weight-normal">Sign In</h1>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" name="username" class="form-control" placeholder="Email address" ng-model="vm.username" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="Password" ng-model="vm.password" required>
+        <!-- <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div> -->
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <a href="#!/register" class="btn btn-link">Register</a>
+    </form>
+</div>
