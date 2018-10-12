@@ -12,6 +12,7 @@
 
         vm.allQuestions = AppGlobalConstants.questionnaire;
         vm.submitQuestionnaire = submitQuestionnaire;
+        vm.openQuestionnaire = openQuestionnaire;
         vm.questionnaireSubmitted = false;
         vm.questionnaireApiResponse = {};
 
@@ -37,13 +38,20 @@
             })
         }
 
+        function openQuestionnaire(){
+            $('#questionnaire-modal').modal('show');
+        }
+
         $(document).ready(function () {
 
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
             });
 
-            $('#questionnaire-modal').modal('show');
+            if (!AppGlobalConstants.alreadyOpenedQuestionnaire){
+                $('#questionnaire-modal').modal('show');
+                AppGlobalConstants.alreadyOpenedQuestionnaire = true;
+            }
         
         });
     }

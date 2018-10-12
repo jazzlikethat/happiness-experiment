@@ -12,7 +12,7 @@
               <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">My Info</a>
               <ul class="collapse list-unstyled" id="pageSubmenu">
                   <li>
-                      <a>Questionnaire</a>
+                      <a ng-click="vm.openQuestionnaire()">Questionnaire</a>
                   </li>
                   <li>
                       <a>Daily Balance Chart</a>
@@ -26,6 +26,7 @@
   </nav>
 
   <!-- Page Content  -->
+
     <div class="modal" id="questionnaire-modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -42,3 +43,6 @@
         </div>
     </div>
 
+    <img src="../assets/download.png" alt="Sample Graph">
+
+</div>
