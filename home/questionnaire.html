@@ -1,28 +1,34 @@
 <div class="questionnaire">
-    <table ng-show="!vm.questionnaireSubmitted">
-        <tr>
-            <th class="question"></th>
-            <th class="option">Strongly disagree</th>
-            <th class="option">Moderately disagree</th>
-            <th class="option">Slightly disagree</th>
-            <th class="option">Slightly agree</th>
-            <th class="option">Moderately agree</th>
-            <th class="option">Strongly agree</th>
-        </tr>
-        <tr ng-repeat="question in vm.allQuestions">
-            <td class="question">{{question.text}}</td>
-            <td class="option"><input type="radio" name="{{question.text}}" value="6" ng-model="question['value']"></td>
-            <td class="option"><input type="radio" name="{{question.text}}" value="5" ng-model="question['value']"></td>
-            <td class="option"><input type="radio" name="{{question.text}}" value="4" ng-model="question['value']"></td>
-            <td class="option"><input type="radio" name="{{question.text}}" value="3" ng-model="question['value']"></td>
-            <td class="option"><input type="radio" name="{{question.text}}" value="2" ng-model="question['value']"></td>
-            <td class="option"><input type="radio" name="{{question.text}}" value="1" ng-model="question['value']"></td>
-        </tr>
-    </table>
+    <div class="table-container">
+        <table ng-show="!vm.questionnaireSubmitted">
+            <tr>
+                <th class="question"></th>
+                <th class="option">Strongly disagree</th>
+                <th class="option">Moderately disagree</th>
+                <th class="option">Slightly disagree</th>
+                <th class="option">Slightly agree</th>
+                <th class="option">Moderately agree</th>
+                <th class="option">Strongly agree</th>
+            </tr>
+            <tr ng-repeat="question in vm.allQuestions" ng-if="question.show">
+                <td class="question">{{question.text}}</td>
+                <td class="option"><input type="radio" name="{{question.text}}" value="6" ng-model="question['value']"></td>
+                <td class="option"><input type="radio" name="{{question.text}}" value="5" ng-model="question['value']"></td>
+                <td class="option"><input type="radio" name="{{question.text}}" value="4" ng-model="question['value']"></td>
+                <td class="option"><input type="radio" name="{{question.text}}" value="3" ng-model="question['value']"></td>
+                <td class="option"><input type="radio" name="{{question.text}}" value="2" ng-model="question['value']"></td>
+                <td class="option"><input type="radio" name="{{question.text}}" value="1" ng-model="question['value']"></td>
+            </tr>
+        </table>
+    </div>
     <div ng-show="vm.questionnaireSubmitted">
         <p>Score: {{vm.questionnaireApiResponse.score}}</p>
         <p>Description: {{vm.questionnaireApiResponse.description}}</p>
         <p>Interpretation: {{vm.questionnaireApiResponse.interpretation}}</p>
+    </div>
+    <div ng-show="!vm.questionnaireSubmitted" class="prev-next">
+        <button type="button" class="btn" ng-click="vm.previousPage()" ng-disabled="vm.disablePrevButton">Previous</button>
+        <button type="button" class="btn" ng-click="vm.nextPage()" ng-disabled="vm.disableNextButton">next</button>
     </div>
     <div class="submit-button">
         <button type="button" class="btn btn-primary" ng-click="vm.submitQuestionnaire()" ng-show="!vm.questionnaireSubmitted">Submit</button>

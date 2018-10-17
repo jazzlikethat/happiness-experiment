@@ -5,14 +5,15 @@
         .module('app')
         .factory('AuthenticationService', AuthenticationService);
 
-    AuthenticationService.$inject = ['$http', '$cookies', '$rootScope', '$timeout', 'UserService', 'AppGlobalConstants'];
-    function AuthenticationService($http, $cookies, $rootScope, $timeout, UserService, AppGlobalConstants) {
+    AuthenticationService.$inject = ['$http', '$cookies', '$rootScope', '$timeout', 'UserService', 'AppGlobalConstants', '$location'];
+    function AuthenticationService($http, $cookies, $rootScope, $timeout, UserService, AppGlobalConstants, $location) {
         var service = {};
 
         service.Login = Login;
         service.signup = signup;
         service.SetCredentials = SetCredentials;
         service.ClearCredentials = ClearCredentials;
+        service.getUserData = getUserData;
 
         return service;
 
@@ -64,6 +65,31 @@
             $rootScope.globals = {};
             $cookies.remove('globals');
             $http.defaults.headers.common.Authorization = 'Basic';
+        }
+
+        function getUserData() {
+
+            // TODO: Improve this logic
+            var userData = AppGlobalConstants.userData;
+            if ("email" in userData) {
+                return;
+            }
+
+            var authdata = $rootScope.globals.currentUser.authdata;
+            var loginDetails = Base64.decode(authdata).split(':');
+            Login(loginDetails[0], loginDetails[1], function(response){
+                if (response.status === 200){
+                    var userData = response.data.user;
+                    AppGlobalConstants.userData = userData;
+                    if (userData.hasFilledQuestionnaire) {
+                        $location.path('/questionnaire');
+                    }
+                }
+                else {
+                    // User login details failed
+                    // TODO
+                }
+            })
         }
     }
 

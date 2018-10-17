@@ -10,17 +10,16 @@
     function HomeController(UserService, $rootScope, AppGlobalConstants, $http) {
         var vm = this;
 
+        vm.questionnaireSubmitted = false;
+
         vm.allQuestions = AppGlobalConstants.questionnaire;
         vm.submitQuestionnaire = submitQuestionnaire;
-        vm.openQuestionnaire = openQuestionnaire;
-        vm.questionnaireSubmitted = false;
         vm.questionnaireApiResponse = {};
 
         function submitQuestionnaire() {
             var answers = [];
             for (var i = 0; i < vm.allQuestions.length; i++){
-                // answers.push(vm.allQuestions[i].value);
-                answers.push(5);
+                answers.push(vm.allQuestions[i].value);
             }
             var email = "suresh.kumar@gmail.com"; // TODO
 
@@ -38,22 +37,6 @@
             })
         }
 
-        function openQuestionnaire(){
-            $('#questionnaire-modal').modal('show');
-        }
-
-        $(document).ready(function () {
-
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
-
-            if (!AppGlobalConstants.alreadyOpenedQuestionnaire){
-                $('#questionnaire-modal').modal('show');
-                AppGlobalConstants.alreadyOpenedQuestionnaire = true;
-            }
-        
-        });
     }
 
     Questionnaire.$inject = [];

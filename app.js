@@ -27,11 +27,17 @@
                 controllerAs: 'vm'
             })
 
+            .when('/questionnaire', {
+                controller: 'questionnaireController',
+                templateUrl: './questionnaire/questionnaire.view.html',
+                controllerAs: 'vm'
+            })
+
             .otherwise({ redirectTo: '/login' });
     }
 
-    run.$inject = ['$rootScope', '$location', '$cookies', '$http'];
-    function run($rootScope, $location, $cookies, $http) {
+    run.$inject = ['$rootScope', '$location', '$cookies', '$http', 'AuthenticationService'];
+    function run($rootScope, $location, $cookies, $http, AuthenticationService) {
         // keep user logged in after page refresh
         $rootScope.globals = $cookies.getObject('globals') || {};
         if ($rootScope.globals.currentUser) {
@@ -44,6 +50,10 @@
             var loggedIn = $rootScope.globals.currentUser;
             if (restrictedPage && !loggedIn) {
                 $location.path('/login');
+            }
+            else {
+                // Improve this logic
+                AuthenticationService.getUserData();
             }
         });
     }
