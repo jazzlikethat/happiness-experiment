@@ -1,4 +1,33 @@
 ﻿/* ---------------------------------------------------
+  SIDEBAR
+----------------------------------------------------- */
+.root-container .sidebar {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  width: 200px;
+  background-color: #aaf9aa;
+  padding-top: 250px;
+}
+.sidebar .sidebar-button, .sidebar .sidebar-sub-button {
+  padding: 5px 0 5px 25px;
+  cursor: pointer;
+  background-color: beige;
+  margin-bottom: 5px;
+}
+.sidebar .sidebar-sub-button {
+  padding-left: 35px;
+  font-size: 85%;
+}
+.sidebar .sidebar-button:hover, .sidebar .sidebar-sub-button:hover {
+  background-color: #f3f3cb;
+}
+.sidebar .sidebar-button.active, .sidebar .sidebar-sub-button.active {
+  background-color: #fbfbc5;
+}
+
+/* ---------------------------------------------------
   LOGIN & REGISTER
 ----------------------------------------------------- */
   .login, .register {
