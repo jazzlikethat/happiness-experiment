@@ -72,6 +72,11 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
+  .logout {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+  }
 
 
 /* ---------------------------------------------------
