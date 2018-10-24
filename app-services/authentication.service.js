@@ -81,7 +81,7 @@
                 if (response.status === 200){
                     var userData = response.data.user;
                     AppGlobalConstants.userData = userData;
-                    if (userData.hasFilledQuestionnaire) {
+                    if (!userData.hasFilledQuestionnaire) {
                         $location.path('/questionnaire');
                     }
                 }

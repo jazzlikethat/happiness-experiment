@@ -132,6 +132,19 @@
 .daily-balance-container .center-align {
   text-align: center;
 }
+.daily-balance-container .trend-box {
+  width: 35px;
+  height: 10px;
+}
+.daily-balance-container .trend-box.red {
+  background-color: red;
+}
+.daily-balance-container .trend-box.yellow {
+  background-color: yellow;
+}
+.daily-balance-container .trend-box.green {
+  background-color: green;
+}
 
 /* ---------------------------------------------------
   STAR BASED RATING

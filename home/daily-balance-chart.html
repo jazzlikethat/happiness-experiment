@@ -13,9 +13,8 @@
                     <span>How Excited were you to start your day?</span>
                 </td>
                 <td class="center-align temp-right-padding">
-                    <select ng-model="vm.field1">
+                    <select ng-model="vm.field1" ng-change="vm.field1Changed()">
                         <option value="">Select</option>
-                        <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -25,18 +24,20 @@
                         <option value="7">7</option>
                         <option value="8">8</option>
                         <option value="9">9</option>
+                        <option value="10">10</option>
                     </select>
                 </td>
-                <td></td>
+                <td>
+                    <div class="trend-box" ng-class="{'red': vm.field1IsRed, 'yellow': vm.field1IsYellow, 'green': vm.field1IsGreen}"></div>
+                </td>
             </tr>
             <tr>
                 <td>
                     <span>Was it a good Day?</span>
                 </td>
                 <td class="center-align temp-right-padding">
-                    <select ng-model="vm.field2">
+                    <select ng-model="vm.field2" ng-change="vm.field2Changed()">
                         <option value="">Select</option>
-                        <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -46,9 +47,12 @@
                         <option value="7">7</option>
                         <option value="8">8</option>
                         <option value="9">9</option>
+                        <option value="10">10</option>
                     </select>
                 </td>
-                <td></td>
+                <td>
+                    <div class="trend-box" ng-class="{'red': vm.field2IsRed, 'yellow': vm.field2IsYellow, 'green': vm.field2IsGreen}"></div>
+                </td>
             </tr>
             <tr ng-repeat="entry in vm.dailyBalanceEntries">
                 <td>
@@ -88,13 +92,13 @@
     <div class="card"><span>Yellow (Y) - Trending slightly down or slightly below expectation</span></div>
     <div class="card"><span>Red (R) - Trending down or much below expectation, requesting assistance</span></div>
     <div class="card">
-        <span>Fill in +'s and -'s in the rows that impacted your scoring</span>
-        <span>+ Positive impact</span>
-        <span>++ Very positive</span>
-        <span>+++ Extremely positive</span>
-        <span>- Negative impact</span>
-        <span>-- Very negative</span>
-        <span>--- Extremely negative</span>
+        <span>Fill in &#9733;'s in the rows that impacted your scoring</span>
+        <span>&#9733; Extremely negative</span>
+        <span>&#9733; &#9733; Very negative</span>
+        <span>&#9733; &#9733; &#9733; Negative impact</span>
+        <span>&#9733; &#9733; &#9733; &#9733; Extremely positive</span>
+        <span>&#9733; &#9733; &#9733; &#9733; &#9733; Very positive</span>
+        <span>&#9733; &#9733; &#9733; &#9733; &#9733; &#9733; Positive impact</span>
     </div>
     <div class="card"><span>Collect this data for a minimum of 7 straight days prior to starting Engineering Happiness. This is your baseline data.</span></div>
 </div>
