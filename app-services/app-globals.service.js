@@ -4,7 +4,7 @@ angular.module('app')
 
 .constant('AppGlobalConstants', (function() {
 
-    var base = "http://ec2-18-222-199-167.us-east-2.compute.amazonaws.com:8888";
+    var base = "http://ec2-18-191-31-160.us-east-2.compute.amazonaws.com:8888";
 
     var questionnaire = [
         {

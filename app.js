@@ -51,8 +51,8 @@
             if (restrictedPage && !loggedIn) {
                 $location.path('/login');
             }
-            else {
-                // Improve this logic
+            else if ($rootScope.globals.currentUser) {
+                // TODO: Improve this logic
                 AuthenticationService.getUserData();
             }
         });
