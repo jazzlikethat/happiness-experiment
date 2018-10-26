@@ -39,8 +39,8 @@
     run.$inject = ['$rootScope', '$location', '$cookies', '$http', 'AuthenticationService', 'AppGlobalConstants'];
     function run($rootScope, $location, $cookies, $http, AuthenticationService, AppGlobalConstants) {
         // Set Base URL
-        var base = $location.protocol() + ':' + $location.host() + ':' + $location.port();
-        AppGlobalConstants.baseURL = base;
+        // var base = $location.protocol() + ':' + $location.host() + ':' + $location.port();
+        // AppGlobalConstants.baseURL = base;
 
         // keep user logged in after page refresh
         $rootScope.globals = $cookies.getObject('globals') || {};
