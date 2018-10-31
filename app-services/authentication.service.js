@@ -13,7 +13,7 @@
         service.signup = signup;
         service.SetCredentials = SetCredentials;
         service.ClearCredentials = ClearCredentials;
-        service.getUserData = getUserData;
+        service.decodeBase64 = decodeBase64;
 
         return service;
 
@@ -67,30 +67,11 @@
             $http.defaults.headers.common.Authorization = 'Basic';
         }
 
-        function getUserData() {
-
-            // TODO: Improve this logic
-            var userData = AppGlobalConstants.userData;
-            if ("email" in userData) {
-                return;
-            }
-
-            var authdata = $rootScope.globals.currentUser.authdata;
-            var loginDetails = Base64.decode(authdata).split(':');
-            Login(loginDetails[0], loginDetails[1], function(response){
-                if (response.status === 200){
-                    var userData = response.data.user;
-                    AppGlobalConstants.userData = userData;
-                    if (!userData.hasFilledQuestionnaire) {
-                        $location.path('/questionnaire');
-                    }
-                }
-                else {
-                    // User login details failed
-                    // TODO
-                }
-            })
+        function decodeBase64(string, callback){
+            var returnValue = Base64.decode(string).split(':');
+            callback(returnValue);
         }
+
     }
 
     // Base64 encoding service used by AuthenticationService

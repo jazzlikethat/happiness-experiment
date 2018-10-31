@@ -27,20 +27,11 @@
                 controllerAs: 'vm'
             })
 
-            .when('/questionnaire', {
-                controller: 'questionnaireController',
-                templateUrl: './questionnaire/questionnaire.view.html',
-                controllerAs: 'vm'
-            })
-
             .otherwise({ redirectTo: '/login' });
     }
 
     run.$inject = ['$rootScope', '$location', '$cookies', '$http', 'AuthenticationService', 'AppGlobalConstants'];
     function run($rootScope, $location, $cookies, $http, AuthenticationService, AppGlobalConstants) {
-        // Set Base URL
-        // var base = $location.protocol() + ':' + $location.host() + ':' + $location.port();
-        // AppGlobalConstants.baseURL = base;
 
         // keep user logged in after page refresh
         $rootScope.globals = $cookies.getObject('globals') || {};
@@ -54,10 +45,6 @@
             var loggedIn = $rootScope.globals.currentUser;
             if (restrictedPage && !loggedIn) {
                 $location.path('/login');
-            }
-            else if ($rootScope.globals.currentUser) {
-                // TODO: Improve this logic
-                AuthenticationService.getUserData();
             }
         });
     }

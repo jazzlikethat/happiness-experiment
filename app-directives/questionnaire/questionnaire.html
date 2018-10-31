@@ -1,6 +1,6 @@
 <div class="questionnaire">
     <div class="table-container">
-        <table ng-show="!vm.questionnaireSubmitted">
+        <table ng-show="!questionnaireSubmitted">
             <tr>
                 <th class="question"></th>
                 <th class="option">Strongly disagree</th>
@@ -10,7 +10,7 @@
                 <th class="option">Moderately agree</th>
                 <th class="option">Strongly agree</th>
             </tr>
-            <tr ng-repeat="question in vm.allQuestions" ng-if="question.show">
+            <tr ng-repeat="question in allQuestions" ng-if="question.show">
                 <td class="question">{{question.text}}</td>
                 <td class="option"><input type="radio" name="{{question.text}}" value="6" ng-model="question['value']"></td>
                 <td class="option"><input type="radio" name="{{question.text}}" value="5" ng-model="question['value']"></td>
@@ -21,16 +21,16 @@
             </tr>
         </table>
     </div>
-    <div ng-show="vm.questionnaireSubmitted">
-        <p>Score: {{vm.questionnaireApiResponse.score}}</p>
-        <p>Description: {{vm.questionnaireApiResponse.description}}</p>
-        <p>Interpretation: {{vm.questionnaireApiResponse.interpretation}}</p>
+    <div ng-show="questionnaireSubmitted">
+        <p>Score: {{questionnaireApiResponse.score}}</p>
+        <p>Description: {{questionnaireApiResponse.description}}</p>
+        <p>Interpretation: {{questionnaireApiResponse.interpretation}}</p>
     </div>
-    <div ng-show="!vm.questionnaireSubmitted" class="prev-next">
-        <button type="button" class="btn" ng-click="vm.previousPage()" ng-disabled="vm.disablePrevButton">Previous</button>
-        <button type="button" class="btn" ng-click="vm.nextPage()" ng-disabled="vm.disableNextButton">next</button>
+    <div ng-show="!questionnaireSubmitted" class="prev-next">
+        <button type="button" class="btn" ng-click="previousPage()" ng-disabled="disablePrevButton">Previous</button>
+        <button type="button" class="btn" ng-click="nextPage()" ng-disabled="disableNextButton">next</button>
     </div>
     <div class="submit-button">
-        <button type="button" class="btn btn-primary" ng-click="vm.submitQuestionnaire()" ng-show="!vm.questionnaireSubmitted">Submit</button>
+        <button type="button" class="btn btn-primary" ng-click="submitQuestionnaire()" ng-show="!questionnaireSubmitted">Submit</button>
     </div>
 </div>
