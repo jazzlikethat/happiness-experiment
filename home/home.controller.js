@@ -25,6 +25,8 @@
             })
         }
 
+        vm.showDashboard = false;
+        vm.showLesson = false;
         vm.showQuestionnaire = false;
         vm.showDailyBalanceChart = false;
         
@@ -34,23 +36,31 @@
         vm.goToLesson = goToLesson;
 
         function goToQuestionnaire(){
+            vm.showDashboard = false;
+            vm.showLesson = false;
             vm.showDailyBalanceChart = false;
             vm.showQuestionnaire = true;
         }
 
         function goToDailyBalanceChart() {
+            vm.showDashboard = false;
+            vm.showLesson = false;
             vm.showQuestionnaire = false;
             vm.showDailyBalanceChart = true;
         }
 
         function goToDashboard() {
+            vm.showLesson = false;
             vm.showQuestionnaire = false;
             vm.showDailyBalanceChart = false;
+            vm.showDashboard = true;
         }
 
         function goToLesson() {
+            vm.showDashboard = false;
             vm.showQuestionnaire = false;
             vm.showDailyBalanceChart = false;
+            vm.showLesson = true;
         }
 
     }

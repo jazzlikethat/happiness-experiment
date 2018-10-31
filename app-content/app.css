@@ -94,6 +94,10 @@
 .questionnaire .table-container {
   height: 220px;
 }
+.questionnaire .question-row.highlight {
+  background-color: #f2f2f2;
+  border-radius: 5px;
+}
 .questionnaire .question {
   width: 540px;
   padding: 5px 25px 5px;
@@ -109,6 +113,17 @@
 .questionnaire .submit-button {
   margin-top: 15px;
   text-align: center;
+}
+.questionnaire .page-number {
+  display: inline-block;
+  padding: 0 10px;
+  margin: 0 2.5px;
+  cursor: pointer;
+}
+.questionnaire .page-number.active {
+  color: #3333ff;
+  background-color: #f2f2f2;
+  border-radius: 5px;
 }
 
 /* ---------------------------------------------------

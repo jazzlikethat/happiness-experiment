@@ -10,7 +10,7 @@
                 <th class="option">Moderately agree</th>
                 <th class="option">Strongly agree</th>
             </tr>
-            <tr ng-repeat="question in allQuestions" ng-if="question.show">
+            <tr class="question-row" ng-repeat="question in allQuestions" ng-show="(curPage * 5 <= $index) && ((curPage + 1) * 5 > $index)" ng-class="{highlight: ($odd && curPage % 2 === 0) || ($even && curPage % 2 !== 0)}">
                 <td class="question">{{question.text}}</td>
                 <td class="option"><input type="radio" name="{{question.text}}" value="6" ng-model="question['value']"></td>
                 <td class="option"><input type="radio" name="{{question.text}}" value="5" ng-model="question['value']"></td>
@@ -27,8 +27,9 @@
         <p>Interpretation: {{questionnaireApiResponse.interpretation}}</p>
     </div>
     <div ng-show="!questionnaireSubmitted" class="prev-next">
-        <button type="button" class="btn" ng-click="previousPage()" ng-disabled="disablePrevButton">Previous</button>
-        <button type="button" class="btn" ng-click="nextPage()" ng-disabled="disableNextButton">next</button>
+        <button type="button" class="btn" ng-click="curPage = curPage - 1" ng-disabled="curPage === 0">Previous</button>
+        <div class="page-number" ng-repeat="page in paginationArray" ng-click="switchToPage(page)" ng-class="{active: (page === curPage)}">{{page + 1}}</div>
+        <button type="button" class="btn" ng-click="curPage = curPage + 1" ng-disabled="curPage + 1 > allQuestions.length / 5">Next</button>
     </div>
     <div class="submit-button">
         <button type="button" class="btn btn-primary" ng-click="submitQuestionnaire()" ng-show="!questionnaireSubmitted">Submit</button>
