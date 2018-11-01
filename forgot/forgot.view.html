@@ -1,0 +1,14 @@
+<div class="forgot">
+    <form class="form-signin" name="form" ng-submit="vm.forgot()" role="form">
+        <h1 class="h3 mb-3 font-weight-normal">Forgot Password</h1>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" name="username" class="form-control" placeholder="Email address" ng-change="vm.resetFlags()" ng-model="vm.username" ng-disabled="vm.resetSuccess" required autofocus>
+        <button class="btn btn-lg btn-primary btn-block submit" type="submit" ng-disabled="vm.resetSuccess">Submit</button>
+        <div class="success-message" ng-show="vm.resetSuccess">
+            <span>An email has been sent to the provided address with the instructions on how to reset your password.</span>
+        </div>
+        <div class="error-message" ng-show="vm.resetFailure">
+            <span>An account could not be found with the provided address. Please check the email address again.</span>
+        </div>
+    </form>
+</div>

@@ -32,7 +32,7 @@
                 function submitQuestionnaire() {
                     var answers = [];
                     for (var i = 0; i < vm.allQuestions.length; i++){
-                        answers.push(vm.allQuestions[i].value);
+                        answers.push(parseInt(vm.allQuestions[i].value));
                     }
                     var email = AppGlobalConstants.userData.email;
         

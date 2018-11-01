@@ -13,6 +13,7 @@
         service.signup = signup;
         service.SetCredentials = SetCredentials;
         service.ClearCredentials = ClearCredentials;
+        service.forgot = forgot;
         service.decodeBase64 = decodeBase64;
 
         return service;
@@ -70,6 +71,16 @@
         function decodeBase64(string, callback){
             var returnValue = Base64.decode(string).split(':');
             callback(returnValue);
+        }
+
+        function forgot(payload, callback) {
+            $http({
+                url: AppGlobalConstants.baseURL + '/forgotPassword ',
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                data: payload
+            })
+            .then(callback, callback).catch(angular.noop);
         }
 
     }

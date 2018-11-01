@@ -33,7 +33,7 @@
 /* ---------------------------------------------------
   LOGIN & REGISTER
 ----------------------------------------------------- */
-  .login, .register {
+  .login, .register, .forgot {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
@@ -76,6 +76,9 @@
     position: fixed;
     top: 15px;
     right: 15px;
+  }
+  .forgot .submit {
+    margin: 10px 0;
   }
 
 

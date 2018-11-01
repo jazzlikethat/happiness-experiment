@@ -16,7 +16,9 @@
 
             var payload = {
                 email: vm.user.username,
-                password: vm.user.password
+                password: vm.user.password,
+                fName: vm.user.firstName,
+                lName: vm.user.lastName
             }
             AuthenticationService.signup(payload, function (response) {
                 if (response.status === 200) {
