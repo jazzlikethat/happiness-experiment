@@ -1,0 +1,15 @@
+<div>
+    <div class="lesson-number">Lesson number {{lessons[0].lessonNumber}}</div>
+    <div class="lesson-header">{{lessons[0].title}}</div>
+    <div class="task" ng-repeat="task in lessons[0].tasks">
+        <div class="question">{{task.description}}</div>
+        <div class="user-response">
+            <textarea name="{{task.description}}" rows="5" ng-model="task.userResponse" style="width: 70%;" ng-disabled="lessonSubmitted" ng-change="resetFlags()"></textarea>
+        </div>
+    </div>
+    <div class="submit-button">
+        <button type="button" class="btn btn-primary" ng-click="submitLesson()" ng-disabled="lessonSubmitted">Submit</button>
+    </div>
+    <div class="success-message" ng-show="lessonSubmitted">Successfully completed lesson {{lessons[0].lessonNumber}}</div>
+    <div class="error-message" ng-show="invalidResponse">Please answer all the questions.</div>
+</div>
