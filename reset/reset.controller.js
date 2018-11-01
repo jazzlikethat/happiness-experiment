@@ -31,6 +31,7 @@
             AuthenticationService.reset(payload, function(response) {
                 if (response.status === 200) {
                     FlashService.Success('Password change successful', true);
+                    $location.search('token', null);
                     $location.path('/login');
                 }
                 else {
