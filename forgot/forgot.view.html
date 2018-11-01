@@ -4,6 +4,7 @@
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" name="username" class="form-control" placeholder="Email address" ng-change="vm.resetFlags()" ng-model="vm.username" ng-disabled="vm.resetSuccess" required autofocus>
         <button class="btn btn-lg btn-primary btn-block submit" type="submit" ng-disabled="vm.resetSuccess">Submit</button>
+        <a href="#!/login" class="btn btn-link">Login</a>
         <div class="success-message" ng-show="vm.resetSuccess">
             <span>An email has been sent to the provided address with the instructions on how to reset your password.</span>
         </div>

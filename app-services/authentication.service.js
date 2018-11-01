@@ -14,6 +14,7 @@
         service.SetCredentials = SetCredentials;
         service.ClearCredentials = ClearCredentials;
         service.forgot = forgot;
+        service.reset = reset;
         service.decodeBase64 = decodeBase64;
 
         return service;
@@ -76,6 +77,16 @@
         function forgot(payload, callback) {
             $http({
                 url: AppGlobalConstants.baseURL + '/forgotPassword ',
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                data: payload
+            })
+            .then(callback, callback).catch(angular.noop);
+        }
+
+        function reset(payload, callback) {
+            $http({
+                url: AppGlobalConstants.baseURL + '/changePassword  ',
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 data: payload

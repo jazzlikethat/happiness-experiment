@@ -80,6 +80,9 @@
   .forgot .submit {
     margin: 10px 0;
   }
+  .form-signin .confirm-password {
+    margin-top: -10px;
+  }
 
 
 /* ---------------------------------------------------
