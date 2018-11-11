@@ -9,9 +9,17 @@
     function RegisterController(AuthenticationService, $location, $rootScope, FlashService) {
         var vm = this;
 
+        vm.invalidPassword = false;
+
         vm.register = register;
+        vm.resetFlags = resetFlags;
 
         function register() {
+
+            if (vm.user.password.trim().length < 6) {
+                vm.invalidPassword = true;
+                return;
+            }
             vm.dataLoading = true;
 
             var payload = {
@@ -29,6 +37,10 @@
                     vm.dataLoading = false;
                 }
             });
+        }
+
+        function resetFlags() {
+            vm.invalidPassword = false;
         }
     }
 

@@ -33,7 +33,7 @@
 /* ---------------------------------------------------
   LOGIN & REGISTER
 ----------------------------------------------------- */
-  .login, .register, .forgot {
+  .login, .register, .forgot, .validate {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
@@ -82,6 +82,10 @@
   }
   .form-signin .confirm-password {
     margin-top: -10px;
+  }
+
+  .validate button {
+    margin-top: 10px;
   }
 
 
