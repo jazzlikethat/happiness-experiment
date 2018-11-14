@@ -30,7 +30,7 @@
             }
             AuthenticationService.signup(payload, function (response) {
                 if (response.status === 200) {
-                    FlashService.Success('Registration successful', true);
+                    FlashService.Success('Registration successful. Check you email to verify your account.', true);
                     $location.path('/login');
                 } else {
                     FlashService.Error(response.data.msg);

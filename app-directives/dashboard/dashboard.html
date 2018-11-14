@@ -1,0 +1,17 @@
+<div class="monthly-table">
+    <div class="description">
+        <div class="description-header">Description</div>
+        <div class="description-body">
+            <div class="description-row" ng-repeat="entry in dailyBalanceEntries" ng-class="{last: ($last === true)}">{{entry}}</div>
+        </div>
+    </div><div class="day-score">
+        <div class="score-header-row">
+            <div ng-repeat="day in totalDays" class="score-header-cell">{{day}}</div>
+        </div>
+        <div class="score-body">
+            <div ng-repeat="entry in dailyBalanceEntries" class="score-body-row" ng-class="{last: ($last === true)}">
+                <div ng-repeat="day in totalDays" class="score-body-cell"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -25,7 +25,7 @@
             })
         }
 
-        vm.showDashboard = false;
+        vm.showDashboard = true;
         vm.showLesson = false;
         vm.showQuestionnaire = false;
         vm.showDailyBalanceChart = false;

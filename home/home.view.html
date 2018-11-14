@@ -7,6 +7,9 @@
 </div>
 
 <div class="home-container">
+    <div class="dashboard-container" ng-show=vm.showDashboard>
+        <app-dashboard></app-dashboard>
+    </div>
     <div class="lesson-container" ng-show="vm.showLesson">
         <app-lesson></app-lesson>
     </div>

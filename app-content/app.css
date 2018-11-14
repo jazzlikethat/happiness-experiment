@@ -239,3 +239,56 @@
   margin-left: -35%;
 }
 
+/* ---------------------------------------------------
+  MONTHLY BALANCE CHART
+----------------------------------------------------- */
+.monthly-table {
+  width: 1100px;
+  margin: 50px auto;
+}
+.monthly-table .description {
+  width: 175px;
+  float: left;
+}
+.monthly-table .day-score {
+  width: 925px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  float: left;
+}
+.day-score .score-header-row {
+  white-space: nowrap;
+}
+.day-score .score-header-cell {
+  display: inline-block;
+  padding: 5px;
+  width: 75px;
+  height: 34px;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+}
+.day-score .score-body-row {
+  white-space: nowrap;
+  height: 34px;
+}
+.day-score .score-body-cell {
+  display: inline-block;
+  padding: 5px;
+  width: 75px;
+  height: 34px;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+}
+.score-body-row.last .score-body-cell {
+  border-bottom: 1px solid black;
+}
+.description .description-header, .description .description-row {
+  height: 34px;
+  padding: 5px;
+  width: 175px;
+  border: 1px solid black;
+  border-bottom: none;
+}
+.description .description-row.last {
+  border-bottom: 1px solid black;
+}
