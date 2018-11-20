@@ -9,22 +9,6 @@
     function HomeController(UserService, $rootScope, AppGlobalConstants, $http, AuthenticationService) {
         var vm = this;
 
-        // TODO: Improve this logic
-        // On reload, fetch userDetails
-        var userData = AppGlobalConstants.userData;
-        if (!("email" in userData)) {
-            var authdata = $rootScope.globals.currentUser.authdata;
-
-            AuthenticationService.decodeBase64(authdata, function(loginDetails){
-                AuthenticationService.Login(loginDetails[0], loginDetails[1], function (response) {
-                    if (response.status === 200) {
-                        AuthenticationService.SetCredentials(loginDetails[0], loginDetails[1]);
-                        AppGlobalConstants.userData = response.data.user;
-                    }
-                });
-            })
-        }
-
         vm.showDashboard = true;
         vm.showLesson = false;
         vm.showQuestionnaire = false;

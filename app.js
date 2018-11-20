@@ -64,6 +64,9 @@
             if (restrictedPage && !loggedIn) {
                 $location.path('/login');
             }
+            else if (loggedIn) {
+                AuthenticationService.getUserData();
+            }
         });
     }
 

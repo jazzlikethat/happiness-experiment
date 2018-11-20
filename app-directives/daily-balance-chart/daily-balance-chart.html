@@ -8,57 +8,26 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>
-                    <span>How Excited were you to start your day?</span>
-                </td>
-                <td class="center-align temp-right-padding">
-                    <select ng-model="field1" ng-change="field1Changed()">
-                        <option value="">Select</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
-                </td>
-                <td>
-                    <div class="trend-box" ng-class="{'red': field1IsRed, 'yellow': field1IsYellow, 'green': field1IsGreen}"></div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Was it a good Day?</span>
-                </td>
-                <td class="center-align temp-right-padding">
-                    <select ng-model="field2" ng-change="field2Changed()">
-                        <option value="">Select</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
-                </td>
-                <td>
-                    <div class="trend-box" ng-class="{'red': field2IsRed, 'yellow': field2IsYellow, 'green': field2IsGreen}"></div>
-                </td>
-            </tr>
             <tr ng-repeat="entry in dailyBalanceEntries">
                 <td>
-                <span>{{entry}}</span>
+                <span>{{entry.description}}</span>
                 </td>
-                <td class="center-align">
+                <td class="center-align temp-right-padding" ng-show="entry.balanceChartName === 'q1' || entry.balanceChartName === 'q2'">
+                    <select ng-model="entry.score" ng-change="fieldChanged(entry)">
+                        <option value="">Select</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </td>
+                <td class="center-align" ng-show="entry.balanceChartName !== 'q1' && entry.balanceChartName !== 'q2'">
                     <div class="rate">
                         <input type="radio" id="{{entry}}star6" name="{{entry}}" value="6" />
                         <label for="{{entry}}star6" title="text">6 stars</label>
@@ -74,7 +43,12 @@
                         <label for="{{entry}}star1" title="text">1 star</label>
                     </div>
                 </td>
-                <td></td>
+                <td>
+                    <div class="trend-box" ng-show="entry.balanceChartName === 'q1' || entry.balanceChartName === 'q2'" 
+                        ng-class="{'red': field1IsRed, 'yellow': field1IsYellow, 'green': field1IsGreen}">
+                    </div>
+                    <div></div>
+                </td>
             </tr>
             <tr>
                 <td><span><b>Overall Score</b></span></td>
@@ -87,7 +61,7 @@
         <button type="button" class="btn btn-primary" ng-click="submitDailyBalance()" ng-disabled="dailyBalanceSubmitted">Submit</button>
     </div>
 </div><div class="chart-guide">
-    <div class="card"><span>Note: Trends are shown once you submit this chart.</span></div>
+    <div class="card"><span>Note: Trends are shown once you fill the score.</span></div>
     <div class="card"><span>Green (G) - Under control</span></div>
     <div class="card"><span>Yellow (Y) - Trending slightly down or slightly below expectation</span></div>
     <div class="card"><span>Red (R) - Trending down or much below expectation, requesting assistance</span></div>

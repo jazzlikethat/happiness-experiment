@@ -16,7 +16,7 @@
         service.forgot = forgot;
         service.reset = reset;
         service.validate = validate;
-        service.decodeBase64 = decodeBase64;
+        service.getUserData = getUserData;
 
         return service;
 
@@ -70,11 +70,6 @@
             $http.defaults.headers.common.Authorization = 'Basic';
         }
 
-        function decodeBase64(string, callback){
-            var returnValue = Base64.decode(string).split(':');
-            callback(returnValue);
-        }
-
         function forgot(payload, callback) {
             $http({
                 url: AppGlobalConstants.baseURL + '/forgotPassword',
@@ -103,6 +98,45 @@
                 data: payload
             })
             .then(callback, callback).catch(angular.noop);
+        }
+
+        function getUserData() {
+
+            var authdata = $rootScope.globals.currentUser.authdata;
+            var loginDetails = Base64.decode(authdata).split(':');
+
+            $http({
+                url: AppGlobalConstants.baseURL + '/login',
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                data: {
+                    email: loginDetails[0],
+                    password: loginDetails[1]
+                }
+            })
+            .then(
+                function (response) {
+                    SetCredentials(loginDetails[0], loginDetails[1]);
+                    getCompleteData(response);
+                },
+                function (response) {
+                    $location.path('/login');
+                }
+            ).catch(angular.noop);
+        }
+
+        function getCompleteData(response) {
+            $http({
+                url: AppGlobalConstants.baseURL + '/user?email=' + response.data.user.email,
+                method: "GET",
+                headers: {"Content-Type": "application/json"}
+            })
+            .then(
+                function(response) {
+                    AppGlobalConstants.userData = response.data;
+                }
+            )
+            .catch(angular.noop);
         }
 
     }
