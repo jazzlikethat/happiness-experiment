@@ -13,7 +13,7 @@
                 <span>{{entry.description}}</span>
                 </td>
                 <td class="center-align temp-right-padding" ng-show="entry.balanceChartName === 'q1' || entry.balanceChartName === 'q2'">
-                    <select ng-model="entry.score" ng-change="fieldChanged(entry)">
+                    <select ng-model="entry.score" ng-change="fieldQ1Q2Changed(entry)" ng-disabled="dailyBalanceSubmitted">
                         <option value="">Select</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -29,23 +29,23 @@
                 </td>
                 <td class="center-align" ng-show="entry.balanceChartName !== 'q1' && entry.balanceChartName !== 'q2'">
                     <div class="rate">
-                        <input type="radio" id="{{entry}}star6" name="{{entry}}" value="6" ng-model="entry.score" />
+                        <input type="radio" id="{{entry}}star6" name="{{entry}}" value="6" ng-model="entry.score" ng-disabled="dailyBalanceSubmitted" />
                         <label for="{{entry}}star6" title="text">6 stars</label>
-                        <input type="radio" id="{{entry}}star5" name="{{entry}}" value="5" ng-model="entry.score" />
+                        <input type="radio" id="{{entry}}star5" name="{{entry}}" value="5" ng-model="entry.score" ng-disabled="dailyBalanceSubmitted" />
                         <label for="{{entry}}star5" title="text">5 stars</label>
-                        <input type="radio" id="{{entry}}star4" name="{{entry}}" value="4" ng-model="entry.score" />
+                        <input type="radio" id="{{entry}}star4" name="{{entry}}" value="4" ng-model="entry.score" ng-disabled="dailyBalanceSubmitted" />
                         <label for="{{entry}}star4" title="text">4 stars</label>
-                        <input type="radio" id="{{entry}}star3" name="{{entry}}" value="3" ng-model="entry.score" />
+                        <input type="radio" id="{{entry}}star3" name="{{entry}}" value="3" ng-model="entry.score" ng-disabled="dailyBalanceSubmitted" />
                         <label for="{{entry}}star3" title="text">3 stars</label>
-                        <input type="radio" id="{{entry}}star2" name="{{entry}}" value="2" ng-model="entry.score" />
+                        <input type="radio" id="{{entry}}star2" name="{{entry}}" value="2" ng-model="entry.score" ng-disabled="dailyBalanceSubmitted" />
                         <label for="{{entry}}star2" title="text">2 stars</label>
-                        <input type="radio" id="{{entry}}star1" name="{{entry}}" value="1" ng-model="entry.score" />
+                        <input type="radio" id="{{entry}}star1" name="{{entry}}" value="1" ng-model="entry.score" ng-disabled="dailyBalanceSubmitted" />
                         <label for="{{entry}}star1" title="text">1 star</label>
                     </div>
                 </td>
                 <td>
                     <div class="trend-box" ng-show="entry.balanceChartName === 'q1' || entry.balanceChartName === 'q2'" 
-                        ng-class="{'red': field1IsRed, 'yellow': field1IsYellow, 'green': field1IsGreen}">
+                        ng-class="{'red': (entry.isRed), 'yellow': (entry.isYellow), 'green': (entry.isGreen)}">
                     </div>
                     <div></div>
                 </td>

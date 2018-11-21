@@ -16,6 +16,7 @@
                 vm.overallScore = null;
                 vm.dailyBalanceSubmitted = false;
 
+                vm.fieldQ1Q2Changed = fieldQ1Q2Changed;
                 vm.submitDailyBalance = submitDailyBalance;
 
                 getDailyBalanceEntries();
@@ -30,12 +31,40 @@
                     })
                 }
 
+                function fieldQ1Q2Changed(entry) {
+                    var curItem = null;
+                    if (entry.balanceChartName === 'q1') {
+                        curItem = vm.dailyBalanceEntries[0];
+                    }
+                    else if (entry.balanceChartName === 'q2') {
+                        curItem = vm.dailyBalanceEntries[1];
+                    }
+                    curItem.isRed = false;
+                    curItem.isGreen = false;
+                    curItem.isYellow = false;
+                    
+                    if (curItem.score.trim() === "") {
+                        return;
+                    }
+
+                    var score = parseInt(curItem.score);
+                    if (score > curItem.previousScore) {
+                        curItem.isGreen = true;
+                    }
+                    else if (score < curItem.previousScore) {
+                        curItem.isRed = true;
+                    }
+                    else {
+                        curItem.isYellow = true;
+                    }
+                }
+
                 function submitDailyBalance() {
                     var entries_mod = [];
                     for (var i = 0; i < vm.dailyBalanceEntries.length; i++) {
                         var entry = vm.dailyBalanceEntries[i];
                         if (entry.balanceChartName === 'q1' || entry.balanceChartName === 'q2') {
-                            vm.overallScore += entry.score;
+                            vm.overallScore += parseInt(entry.score);
                         }
                         var entry_mod = {
                             balanceChartName: entry.balanceChartName,
@@ -67,9 +96,17 @@
 
                 }
 
-                function fieldChanged() {
-                    
+                function evalMonthlyRoutine() {
+                    var balanceChart = AppGlobalConstants.userData.balanceChart;
+                    if (balanceChart.length === 0) {
+                        return;
+                    }
+                    var lastEntry = balanceChart[balanceChart.length - 1];
+                    vm.dailyBalanceEntries[0].previousScore = parseInt(lastEntry.balanceChart[0].score);
+                    vm.dailyBalanceEntries[1].previousScore = parseInt(lastEntry.balanceChart[1].score);
                 }
+
+                vm.$on('fetchUserDataComplete', evalMonthlyRoutine);
 
             }
         }

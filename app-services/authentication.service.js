@@ -134,6 +134,7 @@
             .then(
                 function(response) {
                     AppGlobalConstants.userData = response.data;
+                    $rootScope.$broadcast('fetchUserDataComplete');
                 }
             )
             .catch(angular.noop);
