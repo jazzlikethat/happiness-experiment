@@ -30,6 +30,7 @@
                     })
                     .then( function(response) {
                         vm.lessons = response.data;
+                        console.log(vm.lessons);
                     }, function(response) {
                         // handle this scenario
                     })
