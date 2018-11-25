@@ -1,0 +1,112 @@
+<div ng-show="showWeeklyOverview">
+    <div class="week-container">
+        <div class="week-no">Week 1</div>
+        <div class="lesson" ng-click="openLesson(1)">Lesson 1</div>
+        <div class="thought">Thought 1</div>
+        <div class="thought">Thought 2</div>
+        <div class="thought">Thought 3</div>
+        <div class="thought">Thought 4</div>
+        <div class="thought">Thought 5</div>
+        <div class="thought">Thought 6</div>
+        <div class="thought">Thought 7</div>
+    </div>
+    <div class="week-container">
+        <div class="week-no">Week 2</div>
+        <div class="lesson" ng-click="openLesson(2)">Lesson 2</div>
+        <div class="thought">Thought 8</div>
+        <div class="thought">Thought 9</div>
+        <div class="thought">Thought 10</div>
+        <div class="thought">Thought 11</div>
+        <div class="thought">Thought 12</div>
+        <div class="thought">Thought 13</div>
+        <div class="thought">Thought 14</div>
+    </div>
+    <div class="week-container">
+        <div class="week-no">Week 3</div>
+        <div class="lesson" ng-click="openLesson(3)">Lesson 3</div>
+        <div class="thought">Thought 15</div>
+        <div class="thought">Thought 16</div>
+        <div class="thought">Thought 17</div>
+        <div class="thought">Thought 18</div>
+        <div class="thought">Thought 19</div>
+    </div>
+</div>
+
+<div ng-show="showLessonOne">
+    <button class="btn btn-primary" ng-click="switchToLessonsOverview()">Switch to Lessons</button>
+    <div class="lesson-number">Lesson number {{lessons[0].lessonNumber}}</div>
+    <div class="lesson-header">{{lessons[0].title}}</div>
+    <div class="task" ng-repeat="task in lessons[0].tasks">
+        <div class="question">{{task.description}}</div>
+        <div class="user-response">
+            <textarea name="{{task.description}}" 
+                rows="5" 
+                ng-model="task.userResponse" 
+                style="width: 70%;" 
+                ng-disabled="lesson1Submitted" 
+                ng-if="task.type === 'textfield'" > 
+            </textarea>
+            <select ng-model="task.userResponse" ng-disabled="lesson1Submitted" ng-if="task.type === 'dropdown'">
+                <option value="">Select</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+            <div class="invalid-response" ng-show="task.invalidResponse">Please answer this question.</div>
+        </div>
+    </div>
+    <div class="submit-button">
+        <button type="button" class="btn btn-primary" ng-click="submitLesson(1)" ng-disabled="lesson1Submitted">Submit</button>
+    </div>
+    <div class="success-message" ng-show="lesson1Submitted">Successfully completed lesson {{lessons[0].lessonNumber}}</div>
+</div>
+
+<div ng-show="showLessonTwo">
+    <button class="btn btn-primary" ng-click="switchToLessonsOverview()">Switch to Lessons</button>
+    <div class="lesson-number">Lesson number {{lessons[1].lessonNumber}}</div>
+    <div class="lesson-header">{{lessons[1].title}}</div>
+    <div>Go to <a ng-click="switchToDailyBalanceChart()">Daily Balance Chart</a></div>
+</div>
+
+<div ng-show="showLessonThree">
+    <button class="btn btn-primary" ng-click="switchToLessonsOverview()">Switch to Lessons</button>
+    <div class="lesson-number">Lesson number {{lessons[2].lessonNumber}}</div>
+    <div class="lesson-header">{{lessons[2].title}}</div>
+    <div class="task" ng-repeat="task in lessons[2].tasks">
+        <div class="question">{{task.description}}</div>
+        <div class="user-response">
+            <textarea name="{{task.description}}" 
+                rows="5" 
+                ng-model="task.userResponse" 
+                style="width: 70%;" 
+                ng-disabled="lesson3Submitted" 
+                ng-if="task.type === 'textfield'" > 
+            </textarea>
+            <select ng-model="task.userResponse" ng-disabled="lesson3Submitted" ng-if="task.type === 'dropdown'">
+                <option value="">Select</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+            <div class="invalid-response" ng-show="task.invalidResponse">Please answer this question.</div>
+        </div>
+    </div>
+    <div class="submit-button">
+        <button type="button" class="btn btn-primary" ng-click="submitLesson(3)" ng-disabled="lesson3Submitted">Submit</button>
+    </div>
+    <div class="success-message" ng-show="lesson3Submitted">Successfully completed lesson {{lessons[2].lessonNumber}}</div>
+</div> 

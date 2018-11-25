@@ -5,8 +5,8 @@
         .module('app')
         .directive('appLesson', Lesson);
 
-    Lesson.$inject = ['$http', 'AppGlobalConstants'];
-    function Lesson($http, AppGlobalConstants) {
+    Lesson.$inject = ['$http', 'AppGlobalConstants', '$rootScope'];
+    function Lesson($http, AppGlobalConstants, $rootScope) {
         return {
             restrict: 'EA',
             templateUrl: './app-directives/lesson/lesson.html',
@@ -14,13 +14,20 @@
                 var vm = scope;
 
                 vm.lessons = null;
-                vm.lessonSubmitted = false;
-                vm.invalidResponse = false;
+                vm.lesson1Submitted = false;
+                vm.lesson3Submitted = false;
+
+                vm.showWeeklyOverview = true;
+                vm.showLessonOne = false;
+                vm.showLessonTwo = false;
+                vm.showLessonThree = false;
 
                 fetchLessons();
 
+                vm.openLesson = openLesson;
+                vm.switchToLessonsOverview = switchToLessonsOverview;
                 vm.submitLesson = submitLesson;
-                vm.resetFlags = resetFlags;
+                vm.switchToDailyBalanceChart = switchToDailyBalanceChart;
 
                 function fetchLessons(){
                     $http({
@@ -30,21 +37,50 @@
                     })
                     .then( function(response) {
                         vm.lessons = response.data;
-                        console.log(vm.lessons);
+                        var lesson3 = vm.lessons[1];
+                        vm.lessons.splice(1, 1);
+                        vm.lessons.push(lesson3);
                     }, function(response) {
                         // handle this scenario
                     })
                     .catch(angular.noop);
                 }
 
-                function submitLesson(){
+                function openLesson(num) {
+                    vm.showWeeklyOverview = false;
+                    if (num === 1) {
+                        vm.showLessonOne = true;
+                    }
+                    else if (num ===2) {
+                        vm.showLessonTwo = true;
+                    }
+                    else if (num === 3) {
+                        vm.showLessonThree = true;
+                    }
+                }
+
+                function switchToLessonsOverview() {
+                    vm.showWeeklyOverview = true;
+                    vm.showLessonOne = false;
+                    vm.showLessonTwo = false;
+                    vm.showLessonThree = false;
+                }
+
+                function submitLesson(num){
                     // check for invalid response
-                    var tasks = vm.lessons[0].tasks;
+                    var invalid = false;
+                    var tasks = vm.lessons[num-1].tasks;
                     for (var i = 0; i < tasks.length; i++) {
                         if (tasks[i].userResponse.trim() === ""){
-                            vm.invalidResponse = true;
-                            return;
+                            tasks[i].invalidResponse = true;
+                            invalid = true;
                         }
+                        else {
+                            tasks[i].invalidResponse = false;
+                        }
+                    }
+                    if (invalid) {
+                        return;
                     }
                     // submit api
                     var payload = {
@@ -58,15 +94,21 @@
                         data: payload
                     })
                     .then(function(response) {
-                        vm.lessonSubmitted = true;
+                        if (num === 1) {
+                            vm.lesson1Submitted = true;
+                        }
+                        else if (num === 3) {
+                            vm.lesson3Submitted = true;
+                        }
                     })
                     .catch(angular.noop);
                 }
 
-                function resetFlags() {
-                    vm.lessonSubmitted = false;
-                    vm.invalidResponse = false;
+                function switchToDailyBalanceChart() {
+                    $rootScope.$emit('switchToDailyBalanceChart');
+                    switchToLessonsOverview();
                 }
+
             }
         }
     }

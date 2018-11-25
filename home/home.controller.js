@@ -47,6 +47,7 @@
             vm.showLesson = true;
         }
 
+        $rootScope.$on('switchToDailyBalanceChart', goToDailyBalanceChart);
     }
 
 })();

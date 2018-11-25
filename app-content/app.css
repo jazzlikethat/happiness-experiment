@@ -266,3 +266,45 @@
 .description .description-row.last {
   border-bottom: 1px solid black;
 }
+
+/* ---------------------------------------------------
+  LESSON
+----------------------------------------------------- */
+.lesson-container {
+  width: 1150px;
+  margin: auto;
+  padding: 100px 50px;
+}
+.lesson-container .week-container {
+  border: 1px solid black;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+.week-container .week-no {
+  font-weight: bold;
+}
+.week-container .lesson, .week-container .thought {
+  cursor: pointer;
+}
+.lesson-container .lesson-number {
+  font-style: italic;
+  margin: 25px 0 5px;
+  font-size: 90%;
+}
+ .lesson-container .lesson-header {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+ .lesson-container .task {
+  padding: 10px 0;
+}
+ .lesson-container .submit-button {
+  margin-top: 15px;
+  text-align: center;
+  margin-left: -35%;
+}
+.lesson-container .invalid-response {
+  font-size: 80%;
+  color: red;
+}
