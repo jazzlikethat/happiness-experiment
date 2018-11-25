@@ -91,7 +91,7 @@
 .questionnaire-container, .daily-balance-container {
   width: 1150px;
   margin: auto;
-  padding-top: 100px;
+  padding: 100px 0;
 }
 .questionnaire-container .home-button {
   padding-top: 10px;
@@ -138,7 +138,7 @@
 .daily-balance-container .chart-table {
   width: 750px;
   float: left;
-  padding: 0 25px;
+  padding: 0 25px 75px;
 }
 .daily-balance-container .chart-guide {
   width: 350px;
@@ -175,41 +175,32 @@
 /* ---------------------------------------------------
   STAR BASED RATING
 ----------------------------------------------------- */
-.rate {
-  float: left;
-  height: 46px;
-  padding: 0 10px;
+.rating {
+  padding-right: 75px;
 }
-.rate:not(:checked) > input {
-  position:absolute;
-  top:-9999px;
+.rating label {
+  float: right;
+  position: relative;
+  width: 25px;
+  height: 20px;
+  cursor: pointer;
 }
-.rate:not(:checked) > label {
-  float:right;
-  width:1em;
-  overflow:hidden;
-  white-space:nowrap;
-  cursor:pointer;
-  font-size: 25px;
-  color:#ccc;
+.rating label:not(:first-of-type) {
+  padding-right: 2px;
 }
-.rate:not(:checked) > label:before {
-  content: '★ ';
+.rating label:before {
+  content: "\2605";
+  font-size: 30px;
+  color: #ccc;
+  line-height: 1;
 }
-.rate > input:checked ~ label {
-  color: #ffc700;    
+.rating input {
+  display: none;
 }
-.rate:not(:checked) > label:hover,
-.rate:not(:checked) > label:hover ~ label {
-  color: #deb217;  
+.rating input:checked ~ label:before, .rating:not(:checked) > label:hover:before, .rating:not(:checked) > label:hover ~ label:before {
+  color: #f9df4a;
 }
-.rate > input:checked + label:hover,
-.rate > input:checked + label:hover ~ label,
-.rate > input:checked ~ label:hover,
-.rate > input:checked ~ label:hover ~ label,
-.rate > label:hover ~ input:checked ~ label {
-  color: #c59b08;
-}
+
 
 /* ---------------------------------------------------
   MONTHLY BALANCE CHART

@@ -15,6 +15,7 @@
 
                 vm.overallScore = null;
                 vm.dailyBalanceSubmitted = false;
+                vm.incompleteResponses = false;
 
                 vm.fieldQ1Q2Changed = fieldQ1Q2Changed;
                 vm.submitDailyBalance = submitDailyBalance;
@@ -61,10 +62,17 @@
 
                 function submitDailyBalance() {
                     var entries_mod = [];
+                    var invalid = false;
+                    vm.incompleteResponses = false;
                     for (var i = 0; i < vm.dailyBalanceEntries.length; i++) {
                         var entry = vm.dailyBalanceEntries[i];
                         if (entry.balanceChartName === 'q1' || entry.balanceChartName === 'q2') {
-                            vm.overallScore += parseInt(entry.score);
+                            if (entry.score > 1){
+                                vm.overallScore += parseInt(entry.score);
+                            }
+                            else {
+                                invalid = true;
+                            }
                         }
                         var entry_mod = {
                             balanceChartName: entry.balanceChartName,
@@ -72,6 +80,12 @@
                             score: entry.score
                         };
                         entries_mod.push(entry_mod);
+                    }
+                    
+                    if (invalid) {
+                        vm.overallScore = null;
+                        vm.incompleteResponses = true;
+                        return;
                     }
 
                     var payload = {
