@@ -22,8 +22,6 @@
                 vm.showLessonTwo = false;
                 vm.showLessonThree = false;
 
-                fetchLessons();
-
                 vm.openLesson = openLesson;
                 vm.switchToLessonsOverview = switchToLessonsOverview;
                 vm.submitLesson = submitLesson;
@@ -40,8 +38,8 @@
                         var lesson3 = vm.lessons[1];
                         vm.lessons.splice(1, 1);
                         vm.lessons.push(lesson3);
-                    }, function(response) {
-                        // handle this scenario
+                        // prefill previous responses
+                        evalLessonsResponse();
                     })
                     .catch(angular.noop);
                 }
@@ -109,6 +107,26 @@
                     switchToLessonsOverview();
                 }
 
+                function evalLessonsResponse() {
+                    var userData = AppGlobalConstants.userData;
+                    var lessonResponses = userData.lessonResponses;
+                    for (var i = 0; i < lessonResponses.length; i++) {
+                        var response = lessonResponses[i];
+                        if (!response.lessonSubmitted) {
+                            continue;
+                        }
+                        if (response.lessonNumber === 1) {
+                            vm.lesson1Submitted = true;
+                            vm.lessons[0].tasks = response.tasks;
+                        }
+                        else if (response.lessonNumber === 3) {
+                            vm.lesson3Submitted = true;
+                            vm.lessons[2].tasks = response.tasks;
+                        }
+                    }
+                }
+
+                vm.$on('fetchUserDataComplete', fetchLessons);
             }
         }
     }
