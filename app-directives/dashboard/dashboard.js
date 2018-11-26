@@ -21,6 +21,8 @@
                     "Relationships", "Community (service)", "Impact", "Work", "Home", "Stress", "Balance", "Other", "Daily score"
                 ];
 
+                var scoresArray = [];
+
                 function evalMonthlyRoutine(){
 
                     vm.monthlyRoutine = AppGlobalConstants.userData.balanceChart;
@@ -31,16 +33,31 @@
 
                     for (var i = 0; i < vm.monthlyRoutine.length; i++) {
                         var day_scores = vm.monthlyRoutine[i];
+                        var total_score = parseInt(day_scores.balanceChart[0].score) + parseInt(day_scores.balanceChart[1].score);
                         var entry = {
                             balanceChartName: "DailyScore",
                             description: "Overall score",
-                            score: parseInt(day_scores.balanceChart[0].score) + parseInt(day_scores.balanceChart[1].score)
+                            score: total_score
                         };
+                        scoresArray.push(total_score);
                         vm.monthlyRoutine[i].balanceChart.push(entry);
                     }
+
+                    zingchart.render({
+                        id: 'myChart',
+                        data: {
+                          type: 'line',
+                          series: [{
+                            values: scoresArray,
+                          }]
+                        }
+                    });
+
                 }
 
                 vm.$on('fetchUserDataComplete', evalMonthlyRoutine);
+
+                
             }
         }
     }
