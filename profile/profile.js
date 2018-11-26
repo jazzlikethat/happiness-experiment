@@ -3,29 +3,19 @@
 
     angular
         .module('app')
-        .directive('profile', Profile);
+        .controller('ProfileController', Profile);
 
-    Profile.$inject = ['AppGlobalConstants', '$http'];
-    function Profile(AppGlobalConstants, $http){
-        return {
-            restrict: 'EA',
-            templateUrl: './app-directives/profile/profile.html',
-            link: function (scope, element, attrs) {
-               
-                var vm = scope;
-                
-                getUserProfileDetails();
-                function getUserProfileDetails() {
-                    $http({
-                        url: AppGlobalConstants.baseURL + '/user?email=sourabh.3b@gmail.com',
-                        method: "GET",
-                        headers: {"Content-Type": "application/json"}
-                    }).then(function(response){
-                        vm.dailyBalanceEntries = response.data;
-                    })
-                }
-            }
+    Profile.$inject = ['AppGlobalConstants', '$http', '$rootScope'];
+    function Profile(AppGlobalConstants, $http, $rootScope){
+        var vm = this;
+       
+        vm.userData = null;
+
+        function evalUserData() {
+            vm.userData = AppGlobalConstants.userData;
         }
+
+        $rootScope.$on('fetchUserDataComplete', evalUserData);
     }
 
 })();
