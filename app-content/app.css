@@ -304,3 +304,13 @@
   font-size: 80%;
   color: red;
 }
+
+/* ---------------------------------------------------
+  LESSON
+----------------------------------------------------- */
+.profile-container {
+  padding-top: 50px;
+}
+.custom-nav-tab .custom-tab-content {
+  padding-top: 25px;
+}

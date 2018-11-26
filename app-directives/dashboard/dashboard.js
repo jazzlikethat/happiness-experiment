@@ -25,6 +25,8 @@
 
                 function evalMonthlyRoutine(){
 
+                    scoresArray = [];
+
                     vm.monthlyRoutine = AppGlobalConstants.userData.balanceChart;
 
                     vm.monthlyRoutine.sort(function(a,b) {
