@@ -5,8 +5,8 @@
         .module('app')
         .directive('dailyBalanceChart', DailyBalanceChart);
 
-    DailyBalanceChart.$inject = ['$http', 'AppGlobalConstants'];
-    function DailyBalanceChart($http, AppGlobalConstants) {
+    DailyBalanceChart.$inject = ['$http', 'AppGlobalConstants', 'AuthenticationService'];
+    function DailyBalanceChart($http, AppGlobalConstants, AuthenticationService) {
         return {
             restrict: 'EA',
             templateUrl: './app-directives/daily-balance-chart/daily-balance-chart.html',
@@ -20,8 +20,6 @@
                 vm.fieldQ1Q2Changed = fieldQ1Q2Changed;
                 vm.submitDailyBalance = submitDailyBalance;
 
-                getDailyBalanceEntries();
-
                 function getDailyBalanceEntries() {
                     $http({
                         url: AppGlobalConstants.baseURL + '/dailyRoutine',
@@ -29,6 +27,7 @@
                         headers: {"Content-Type": "application/json"}
                     }).then(function(response){
                         vm.dailyBalanceEntries = response.data;
+                        evalMonthlyRoutine();
                     })
                 }
 
@@ -55,7 +54,7 @@
                     else if (score < curItem.previousScore) {
                         curItem.isRed = true;
                     }
-                    else {
+                    else if (scope === curItem.previousScore) {
                         curItem.isYellow = true;
                     }
                 }
@@ -102,25 +101,54 @@
                     .then(
                         function(response) {
                             vm.dailyBalanceSubmitted = true;
+                            AuthenticationService.getCompleteData(AppGlobalConstants.userData.email);
                         },
                         function(response) {
                             // show an error message
                         }
                     )
-
+                    .catch(angular.noop);
                 }
 
                 function evalMonthlyRoutine() {
                     var balanceChart = AppGlobalConstants.userData.balanceChart;
-                    if (balanceChart.length === 0) {
+                    var index = 0;
+                    
+                    if (balanceChart.length === 0) { // No previous entry
                         return;
                     }
-                    var lastEntry = balanceChart[balanceChart.length - 1];
+                    else if (vm.dailyBalanceSubmitted && balanceChart.length === 1) { // Only previous entry is today's entry
+                        return;
+                    }
+                    
+                    if (vm.dailyBalanceSubmitted) {
+                        index = balanceChart.length - 2;
+                    }
+                    else {
+                        index = balanceChart.length - 1;
+                    }
+                    var lastEntry = balanceChart[index];
                     vm.dailyBalanceEntries[0].previousScore = parseInt(lastEntry.balanceChart[0].score);
                     vm.dailyBalanceEntries[1].previousScore = parseInt(lastEntry.balanceChart[1].score);
                 }
 
-                vm.$on('fetchUserDataComplete', evalMonthlyRoutine);
+                function evalDailyRoutine() {
+                    console.log('Evaluating daily routine');
+                    var userData = AppGlobalConstants.userData;
+                    var balanceChart = userData.balanceChart;
+                    if (userData.hasFilledDailyBalanceChartToday) {
+                        vm.dailyBalanceEntries = balanceChart[balanceChart.length - 1].balanceChart;
+                        vm.dailyBalanceSubmitted = true;
+                        evalMonthlyRoutine();
+                    }
+                    else {
+                        getDailyBalanceEntries();
+                    }
+                    // Once the daily routine is fetched, unsubscribe to the event
+                    deregisterListener();
+                }
+
+                var deregisterListener = vm.$on('fetchUserDataComplete', evalDailyRoutine);
 
             }
         }
