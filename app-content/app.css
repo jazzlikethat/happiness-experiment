@@ -73,6 +73,11 @@
     top: 15px;
     right: 15px;
   }
+  .profile {
+    position: fixed;
+    top: 15px;
+    right: 90px;
+  }
   .forgot .submit {
     margin: 10px 0;
   }
