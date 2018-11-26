@@ -21,6 +21,12 @@
                 controllerAs: 'vm'
             })
 
+            .when('/profile', {
+                controller: 'ProfileController',
+                templateUrl: 'profile/profile.html',
+                controllerAs: 'vm'
+            })
+
             .when('/register', {
                 controller: 'RegisterController',
                 templateUrl: 'register/register.view.html',
@@ -59,7 +65,7 @@
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in and trying to access a restricted page
-            var restrictedPage = $.inArray($location.path(), ['/login', '/register', '/forgot', '/reset', '/emailvalidate']) === -1;
+            var restrictedPage = $.inArray($location.path(), ['/login', '/register', '/forgot', '/reset', '/emailvalidate','/profile']) === -1;
             var loggedIn = $rootScope.globals.currentUser;
             if (restrictedPage && !loggedIn) {
                 $location.path('/login');
