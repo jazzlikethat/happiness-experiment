@@ -21,6 +21,12 @@
                 controllerAs: 'vm'
             })
 
+            .when('/profile', {
+                controller: 'ProfileController',
+                templateUrl: 'profile/profile.html',
+                controllerAs: 'vm'
+            })
+
             .when('/register', {
                 controller: 'RegisterController',
                 templateUrl: 'register/register.view.html',

@@ -73,6 +73,11 @@
     top: 15px;
     right: 15px;
   }
+  .profile {
+    position: fixed;
+    top: 15px;
+    right: 90px;
+  }
   .forgot .submit {
     margin: 10px 0;
   }
@@ -298,4 +303,14 @@
 .lesson-container .invalid-response {
   font-size: 80%;
   color: red;
+}
+
+/* ---------------------------------------------------
+  LESSON
+----------------------------------------------------- */
+.profile-container {
+  padding-top: 50px;
+}
+.custom-nav-tab .custom-tab-content {
+  padding-top: 25px;
 }

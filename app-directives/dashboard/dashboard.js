@@ -25,6 +25,8 @@
 
                 function evalMonthlyRoutine(){
 
+                    scoresArray = [];
+
                     vm.monthlyRoutine = AppGlobalConstants.userData.balanceChart;
 
                     vm.monthlyRoutine.sort(function(a,b) {
@@ -46,7 +48,42 @@
                     zingchart.render({
                         id: 'myChart',
                         data: {
-                          type: 'line',
+                          type: 'area',
+                          title: {
+                            textAlign: 'center',
+                            text: "Daily Balance Activity Chart"
+                          },
+                          scaleX: {
+                            label: {
+                              text: 'Days',
+                              backgroundColor: '#ffe6e6',
+                              borderColor: 'red',
+                              borderRadius: 3,
+                              borderWidth: 1,
+                              fontColor: 'red',
+                              fontFamily: 'Georgia',
+                              fontSize: 16,
+                              fontStyle: 'normal',
+                              fontWeight: 'normal',
+                              padding: '5px 20px'
+                            }
+                          },
+                          scaleY: {
+                            values: '0:20:5',
+                            label: {
+                              text: 'Daily Score',
+                              backgroundColor: '#ffe6e6',
+                              borderColor: 'red',
+                              borderRadius: 3,
+                              borderWidth: 1,
+                              fontColor: 'red',
+                              fontFamily: 'Georgia',
+                              fontSize: 16,
+                              fontStyle: 'normal',
+                              fontWeight: 'normal',
+                              padding: '3px 20px'
+                            }
+                          },
                           series: [{
                             values: scoresArray,
                           }]

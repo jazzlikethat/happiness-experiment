@@ -133,7 +133,6 @@
                 }
 
                 function evalDailyRoutine() {
-                    console.log('Evaluating daily routine');
                     var userData = AppGlobalConstants.userData;
                     var balanceChart = userData.balanceChart;
                     if (userData.hasFilledDailyBalanceChartToday) {
