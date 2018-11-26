@@ -225,6 +225,7 @@
   float: left;
 }
 .day-score .score-header-row {
+  font-weight: bold;
   white-space: nowrap;
 }
 .day-score .score-header-cell {
@@ -232,8 +233,8 @@
   padding: 5px;
   width: 75px;
   height: 34px;
-  border-top: 1px solid black;
-  border-right: 1px solid black;
+  border-top: 1px solid #dee2e6;
+  border-right: 1px solid #dee2e6;
 }
 .day-score .score-body-row {
   width: 2175px;
@@ -246,21 +247,32 @@
   padding: 5px;
   width: 75px;
   height: 34px;
-  border-top: 1px solid black;
-  border-right: 1px solid black;
+  border-top: 1px solid #dee2e6;
+  border-right: 1px solid #dee2e6;
 }
 .score-body-row.last .score-body-cell {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #dee2e6;
+  font-weight: bold;
+}
+.day-score .score-body-cell.first {
+  border-top-width: 2px;
 }
 .description .description-header, .description .description-row {
   height: 34px;
   padding: 5px;
   width: 325px;
-  border: 1px solid black;
+  border: 1px solid #dee2e6;
   border-bottom: none;
 }
+.description .description-header {
+  font-weight: bold;
+}
+.description .description-row.first {
+  border-top: 2px solid #dee2e6;
+}
 .description .description-row.last {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #dee2e6;
+  font-weight: bold;
 }
 
 /* ---------------------------------------------------

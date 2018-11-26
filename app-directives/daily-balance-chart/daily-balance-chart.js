@@ -130,6 +130,11 @@
                     var lastEntry = balanceChart[index];
                     vm.dailyBalanceEntries[0].previousScore = parseInt(lastEntry.balanceChart[0].score);
                     vm.dailyBalanceEntries[1].previousScore = parseInt(lastEntry.balanceChart[1].score);
+
+                    if (vm.dailyBalanceSubmitted) {
+                        fieldQ1Q2Changed({'balanceChartName': 'q1'});
+                        fieldQ1Q2Changed({'balanceChartName': 'q2'});
+                    }
                 }
 
                 function evalDailyRoutine() {
