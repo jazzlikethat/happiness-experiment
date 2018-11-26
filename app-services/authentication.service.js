@@ -17,6 +17,7 @@
         service.reset = reset;
         service.validate = validate;
         service.getUserData = getUserData;
+        service.getCompleteData = getCompleteData;
 
         return service;
 
@@ -117,7 +118,7 @@
             .then(
                 function (response) {
                     SetCredentials(loginDetails[0], loginDetails[1]);
-                    getCompleteData(response);
+                    getCompleteData(response.data.user.email);
                 },
                 function (response) {
                     $location.path('/login');
@@ -125,9 +126,9 @@
             ).catch(angular.noop);
         }
 
-        function getCompleteData(response) {
+        function getCompleteData(email) {
             $http({
-                url: AppGlobalConstants.baseURL + '/user?email=' + response.data.user.email,
+                url: AppGlobalConstants.baseURL + '/user?email=' + email,
                 method: "GET",
                 headers: {"Content-Type": "application/json"}
             })
