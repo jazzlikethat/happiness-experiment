@@ -14,6 +14,7 @@
                 var vm = scope;
 
                 vm.lessons = null;
+                vm.thoughtNumber = 1;
                 vm.lesson1Submitted = false;
                 vm.lesson3Submitted = false;
 
@@ -23,6 +24,7 @@
                 vm.showLessonThree = false;
 
                 vm.openLesson = openLesson;
+                vm.templateUrl = templateUrl;
                 vm.switchToLessonsOverview = switchToLessonsOverview;
                 vm.submitLesson = submitLesson;
                 vm.switchToDailyBalanceChart = switchToDailyBalanceChart;
@@ -55,6 +57,10 @@
                     else if (num === 3) {
                         vm.showLessonThree = true;
                     }
+                }
+
+                function templateUrl() {
+                    return "/app-directives/thoughts/thought" + vm.thoughtNumber + ".html";
                 }
 
                 function switchToLessonsOverview() {

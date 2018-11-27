@@ -5,11 +5,12 @@
         .module('app')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['UserService', '$rootScope', 'AppGlobalConstants', '$http', 'AuthenticationService'];
-    function HomeController(UserService, $rootScope, AppGlobalConstants, $http, AuthenticationService) {
+    HomeController.$inject = ['UserService', '$rootScope', 'AppGlobalConstants', '$http', 'AuthenticationService', '$timeout'];
+    function HomeController(UserService, $rootScope, AppGlobalConstants, $http, AuthenticationService, $timeout) {
         var vm = this;
 
-        vm.showDashboard = true;
+        vm.hideSpinner = false;
+        vm.showDashboard = false;
         vm.showLesson = false;
         vm.showQuestionnaire = false;
         vm.showDailyBalanceChart = false;
@@ -47,6 +48,21 @@
             vm.showLesson = true;
         }
 
+        function hideSpinner(){
+            $timeout(function(){
+                vm.hideSpinner = true;
+            }, 1000);
+            console.log('Time to hide the spinner');
+            var userData = AppGlobalConstants.userData;
+            if (!userData.hasFilledQuestionnaire) {
+                vm.showQuestionnaire = true;
+            }
+            else if (!userData.hasFilledDailyBalanceChartToday) {
+                vm.showDailyBalanceChart = true;
+            }
+        }
+
+        $rootScope.$on('fetchUserDataComplete', hideSpinner);
         $rootScope.$on('switchToDailyBalanceChart', goToDailyBalanceChart);
     }
 
