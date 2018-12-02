@@ -14,20 +14,17 @@
         vm.showLesson = false;
         vm.showQuestionnaire = false;
         vm.showDailyBalanceChart = false;
-        vm.showCommunity = false;
 
         vm.goToQuestionnaire = goToQuestionnaire;
         vm.goToDailyBalanceChart = goToDailyBalanceChart;
         vm.goToDashboard = goToDashboard;
         vm.goToLesson = goToLesson;
-        vm.goToCommunity = goToCommunity;
 
         function goToQuestionnaire(){
             vm.showDashboard = false;
             vm.showLesson = false;
             vm.showDailyBalanceChart = false;
             vm.showQuestionnaire = true;
-            vm.showCommunity = false;
         }
 
         function goToDailyBalanceChart() {
@@ -35,7 +32,6 @@
             vm.showLesson = false;
             vm.showQuestionnaire = false;
             vm.showDailyBalanceChart = true;
-            vm.showCommunity = false;
         }
 
         function goToDashboard() {
@@ -43,7 +39,6 @@
             vm.showQuestionnaire = false;
             vm.showDailyBalanceChart = false;
             vm.showDashboard = true;
-            vm.showCommunity = false;
         }
 
         function goToLesson() {
@@ -51,15 +46,6 @@
             vm.showQuestionnaire = false;
             vm.showDailyBalanceChart = false;
             vm.showLesson = true;
-            vm.showCommunity = false;
-        }
-
-        function goToCommunity() {
-            vm.showDashboard = false;
-            vm.showQuestionnaire = false;
-            vm.showDailyBalanceChart = false;
-            vm.showLesson = false;
-            vm.showCommunity = true;
         }
 
         function hideSpinner(){

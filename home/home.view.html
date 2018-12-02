@@ -3,7 +3,6 @@
     <div class="sidebar-button" ng-click="vm.goToLesson()">Lessons</div>
     <div class="sidebar-button" ng-click="vm.goToQuestionnaire()">Questionnaire</div>
     <div class="sidebar-button" ng-click="vm.goToDailyBalanceChart()">Daily Balance Chart</div>
-    <div class="sidebar-button" ng-click="vm.goToCommunity()">Community</div>
 </div>
 
 <div class="spinner-container" ng-hide="vm.hideSpinner">
@@ -21,9 +20,6 @@
     </div>
     <div class="daily-balance-container" ng-show="vm.showDailyBalanceChart">
         <daily-balance-chart></daily-balance-chart>
-    </div>
-    <div class="lesson-container" ng-show="vm.showCommunity">
-        <app-community></app-community>
     </div>
 </div>
 
