@@ -52,7 +52,6 @@
             $timeout(function(){
                 vm.hideSpinner = true;
             }, 1000);
-            console.log('Time to hide the spinner');
             var userData = AppGlobalConstants.userData;
             if (!userData.hasFilledQuestionnaire) {
                 vm.showQuestionnaire = true;
