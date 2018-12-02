@@ -1,34 +1,52 @@
 <div ng-show="showWeeklyOverview">
+    <div class="week-no">Week 1</div>
     <div class="week-container">
-        <div class="week-no">Week 1</div>
-        <div class="lesson" ng-click="openLesson(1)">Lesson 1</div>
-        <div class="thought">Thought 1</div>
-        <div class="thought">Thought 2</div>
-        <div class="thought">Thought 3</div>
-        <div class="thought">Thought 4</div>
-        <div class="thought">Thought 5</div>
-        <div class="thought">Thought 6</div>
-        <div class="thought">Thought 7</div>
+        <div class="left-half">
+            <div class="title">Lessons</div>
+            <div class="lesson" ng-click="openLesson(1)">Lesson 1</div>
+        </div>
+        <div class="right-half">
+            <div class="title">Thoughts</div>
+            <div class="thought" data-toggle="modal" data-target="#thought-modal" ng-click="thoughtNumber = 1">Thought 1</div>
+            <div class="thought" data-toggle="modal" data-target="#thought-modal" ng-click="thoughtNumber = 2">Thought 2</div>
+            <div class="thought" data-toggle="modal" data-target="#thought-modal" ng-click="thoughtNumber = 3">Thought 3</div>
+            <div class="thought" data-toggle="modal" data-target="#thought-modal" ng-click="thoughtNumber = 4">Thought 4</div>
+            <div class="thought" data-toggle="modal" data-target="#thought-modal" ng-click="thoughtNumber = 5">Thought 5</div>
+            <div class="thought" data-toggle="modal" data-target="#thought-modal" ng-click="thoughtNumber = 6">Thought 6</div>
+            <div class="thought" data-toggle="modal" data-target="#thought-modal" ng-click="thoughtNumber = 7">Thought 7</div>
+        </div>
     </div>
+    <div class="week-no">Week 2</div>
     <div class="week-container">
-        <div class="week-no">Week 2</div>
-        <div class="lesson" ng-click="openLesson(2)">Lesson 2</div>
-        <div class="thought">Thought 8</div>
-        <div class="thought">Thought 9</div>
-        <div class="thought">Thought 10</div>
-        <div class="thought">Thought 11</div>
-        <div class="thought">Thought 12</div>
-        <div class="thought">Thought 13</div>
-        <div class="thought">Thought 14</div>
+        <div class="left-half">
+            <div class="title">Lessons</div>
+            <div class="lesson" ng-click="openLesson(2)">Lesson 2</div>
+        </div>
+        <div class="right-half">
+            <div class="title">Thoughts</div>
+            <div class="thought" data-toggle="modal" data-target="#thought-modal" ng-click="thoughtNumber = 8">Thought 8</div>
+            <div class="thought" data-toggle="modal" data-target="#thought-modal" ng-click="thoughtNumber = 9">Thought 9</div>
+            <div class="thought" data-toggle="modal" data-target="#thought-modal" ng-click="thoughtNumber = 10">Thought 10</div>
+            <div class="thought" data-toggle="modal" data-target="#thought-modal" ng-click="thoughtNumber = 11">Thought 11</div>
+            <div class="thought" data-toggle="modal" data-target="#thought-modal" ng-click="thoughtNumber = 12">Thought 12</div>
+            <div class="thought" data-toggle="modal" data-target="#thought-modal" ng-click="thoughtNumber = 13">Thought 13</div>
+            <div class="thought" data-toggle="modal" data-target="#thought-modal" ng-click="thoughtNumber = 14">Thought 14</div>
+        </div>
     </div>
+    <div class="week-no">Week 3</div>
     <div class="week-container">
-        <div class="week-no">Week 3</div>
-        <div class="lesson" ng-click="openLesson(3)">Lesson 3</div>
-        <div class="thought">Thought 15</div>
-        <div class="thought">Thought 16</div>
-        <div class="thought">Thought 17</div>
-        <div class="thought">Thought 18</div>
-        <div class="thought">Thought 19</div>
+        <div class="left-half">
+            <div class="title">Lessons</div>
+            <div class="lesson" ng-click="openLesson(3)">Lesson 3</div>
+        </div>
+        <div class="right-half">
+            <div class="title">Thoughts</div>
+            <div class="thought" data-toggle="modal" data-target="#thought-modal" ng-click="thoughtNumber = 15">Thought 15</div>
+            <div class="thought" data-toggle="modal" data-target="#thought-modal" ng-click="thoughtNumber = 16">Thought 16</div>
+            <div class="thought" data-toggle="modal" data-target="#thought-modal" ng-click="thoughtNumber = 17">Thought 17</div>
+            <div class="thought" data-toggle="modal" data-target="#thought-modal" ng-click="thoughtNumber = 18">Thought 18</div>
+            <div class="thought" data-toggle="modal" data-target="#thought-modal" ng-click="thoughtNumber = 19">Thought 19</div>
+        </div>
     </div>
 </div>
 
@@ -109,4 +127,21 @@
         <button type="button" class="btn btn-primary" ng-click="submitLesson(3)" ng-disabled="lesson3Submitted">Submit</button>
     </div>
     <div class="success-message" ng-show="lesson3Submitted">Successfully completed lesson {{lessons[2].lessonNumber}}</div>
-</div> 
+</div>
+
+<div class="modal fade" id="thought-modal" tabindex="-1" role="dialog" aria-labelledby="thought-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="thought-modal-label">Thought {{thoughtNumber}}</h5>
+        </div>
+        <div class="modal-body">
+            <!-- <div data-ng-include ng-src="'../thoughts/thought' + thoughtNumber + '.html'"></div> -->
+            <ng-include src="templateUrl()"></ng-include>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>

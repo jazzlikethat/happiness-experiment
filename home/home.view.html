@@ -6,7 +6,10 @@
     <div class="sidebar-button" ng-click="vm.goToCommunity()">Community</div>
 </div>
 
-<div class="home-container">
+<div class="spinner-container" ng-hide="vm.hideSpinner">
+    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+</div>
+<div class="home-container" ng-show="vm.hideSpinner">
     <div class="dashboard-container" ng-show=vm.showDashboard>
         <app-dashboard></app-dashboard>
     </div>
@@ -26,7 +29,7 @@
 
 
 <div class="profile">
-        <a href="#!/profile">Profile</a>
+    <a href="#!/profile">Profile</a>
 </div>
 
 <div class="logout">
