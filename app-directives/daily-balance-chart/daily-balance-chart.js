@@ -17,7 +17,6 @@
                 vm.dailyBalanceSubmitted = false;
                 vm.incompleteResponses = false;
 
-                vm.fieldQ1Q2Changed = fieldQ1Q2Changed;
                 vm.submitDailyBalance = submitDailyBalance;
 
                 function getDailyBalanceEntries() {
@@ -27,36 +26,7 @@
                         headers: {"Content-Type": "application/json"}
                     }).then(function(response){
                         vm.dailyBalanceEntries = response.data;
-                        evalMonthlyRoutine();
                     })
-                }
-
-                function fieldQ1Q2Changed(entry) {
-                    var curItem = null;
-                    if (entry.balanceChartName === 'q1') {
-                        curItem = vm.dailyBalanceEntries[0];
-                    }
-                    else if (entry.balanceChartName === 'q2') {
-                        curItem = vm.dailyBalanceEntries[1];
-                    }
-                    curItem.isRed = false;
-                    curItem.isGreen = false;
-                    curItem.isYellow = false;
-                    
-                    if (curItem.score.trim() === "") {
-                        return;
-                    }
-
-                    var score = parseInt(curItem.score);
-                    if (score > curItem.previousScore) {
-                        curItem.isGreen = true;
-                    }
-                    else if (score < curItem.previousScore) {
-                        curItem.isRed = true;
-                    }
-                    else if (scope === curItem.previousScore) {
-                        curItem.isYellow = true;
-                    }
                 }
 
                 function submitDailyBalance() {
@@ -110,42 +80,17 @@
                     .catch(angular.noop);
                 }
 
-                function evalMonthlyRoutine() {
-                    var balanceChart = AppGlobalConstants.userData.balanceChart;
-                    var index = 0;
-                    
-                    if (balanceChart.length === 0) { // No previous entry
-                        return;
-                    }
-                    else if (vm.dailyBalanceSubmitted && balanceChart.length === 1) { // Only previous entry is today's entry
-                        return;
-                    }
-                    
-                    if (vm.dailyBalanceSubmitted) {
-                        index = balanceChart.length - 2;
-                    }
-                    else {
-                        index = balanceChart.length - 1;
-                    }
-                    var lastEntry = balanceChart[index];
-                    vm.dailyBalanceEntries[0].previousScore = parseInt(lastEntry.balanceChart[0].score);
-                    vm.dailyBalanceEntries[1].previousScore = parseInt(lastEntry.balanceChart[1].score);
-
-                    if (vm.dailyBalanceSubmitted) {
-                        fieldQ1Q2Changed({'balanceChartName': 'q1'});
-                        fieldQ1Q2Changed({'balanceChartName': 'q2'});
-                    }
-                }
-
                 function evalDailyRoutine() {
                     var userData = AppGlobalConstants.userData;
                     var balanceChart = userData.balanceChart;
                     if (userData.hasFilledDailyBalanceChartToday) {
+                        // Fill the model with today's daily routine
                         vm.dailyBalanceEntries = balanceChart[balanceChart.length - 1].balanceChart;
+                        vm.overallScore = parseInt(vm.dailyBalanceEntries[0].score) + parseInt(vm.dailyBalanceEntries[1].score);
                         vm.dailyBalanceSubmitted = true;
-                        evalMonthlyRoutine();
                     }
                     else {
+                        // In case no previous entries, fetch the entry details
                         getDailyBalanceEntries();
                     }
                     // Once the daily routine is fetched, unsubscribe to the event

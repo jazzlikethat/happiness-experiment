@@ -16,10 +16,15 @@
                 vm.allQuestions = AppGlobalConstants.questionnaire;
                 vm.questionnaireApiResponse = {};
                 vm.questionnaireSubmitted = false;
+                vm.invalidResponse = false;
 
                 vm.paginationArray = [];
                 for (var m = 0; m < vm.allQuestions.length / 5; m++) {
-                    vm.paginationArray.push(m);
+                    var element = {
+                        value: m,
+                        underline: false
+                    };
+                    vm.paginationArray.push(element);
                 }
                 
                 vm.switchToPage = switchToPage;
@@ -31,9 +36,32 @@
         
                 function submitQuestionnaire() {
                     var answers = [];
+                    var invalidForm = false;
                     for (var i = 0; i < vm.allQuestions.length; i++){
-                        answers.push(parseInt(vm.allQuestions[i].value));
+                        var entry = vm.allQuestions[i];
+                        var value = parseInt(entry.value);
+                        if (value > 0) {
+                            answers.push(value);
+                            entry.invalid = false;
+                            var pageNum = Math.floor(i / 5);
+                            vm.paginationArray[pageNum].underline = false;
+                        }
+                        else {
+                            entry.invalid = true;
+                            invalidForm = true;
+                            var pageNum = Math.floor(i / 5);
+                            vm.paginationArray[pageNum].underline = true;
+                        }
                     }
+
+                    if (invalidForm) {
+                        vm.invalidResponse = true;
+                        return;
+                    }
+                    else {
+                        vm.invalidResponse = false;
+                    }
+                    
                     var email = AppGlobalConstants.userData.email;
         
                     $http({

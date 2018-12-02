@@ -2,6 +2,7 @@
     <div class="sidebar-button" ng-click="vm.goToDashboard()">Dashboard</div>
     <div class="sidebar-button" ng-click="vm.goToLesson()">Lessons</div>
     <div class="sidebar-button" ng-click="vm.goToQuestionnaire()">Questionnaire</div>
+    <div class="sidebar-button" ng-click="vm.goToQuestionnaire2()">Questionnaire 2</div>
     <div class="sidebar-button" ng-click="vm.goToDailyBalanceChart()">Daily Balance Chart</div>
 </div>
 
@@ -16,6 +17,9 @@
         <app-lesson></app-lesson>
     </div>
     <div class="questionnaire-container" ng-show="vm.showQuestionnaire">
+        <stanford-questionnaire></stanford-questionnaire>
+    </div>
+    <div class="questionnaire-container" ng-show="vm.showQuestionnaire2">
         <app-questionnaire></app-questionnaire>
     </div>
     <div class="daily-balance-container" ng-show="vm.showDailyBalanceChart">

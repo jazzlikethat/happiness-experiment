@@ -4,7 +4,6 @@
             <tr>
                 <th>Description</th>
                 <th class="center-align temp-right-padding">Score</th>          
-                <th>Trend</th>
             </tr>
         </thead>
         <tbody>
@@ -13,7 +12,7 @@
                 <span>{{entry.description}}</span>
                 </td>
                 <td class="center-align temp-right-padding" ng-show="entry.balanceChartName === 'q1' || entry.balanceChartName === 'q2'">
-                    <select ng-model="entry.score" ng-change="fieldQ1Q2Changed(entry)" ng-disabled="dailyBalanceSubmitted">
+                    <select ng-model="entry.score" ng-disabled="dailyBalanceSubmitted">
                         <option value="">Select</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -43,17 +42,10 @@
                         <label for="{{entry.balanceChartName}}star1"></label>
                     </div>
                 </td>
-                <td>
-                    <div class="trend-box" ng-show="entry.balanceChartName === 'q1' || entry.balanceChartName === 'q2'" 
-                        ng-class="{'red': (entry.isRed), 'yellow': (entry.isYellow), 'green': (entry.isGreen)}">
-                    </div>
-                    <div></div>
-                </td>
             </tr>
             <tr>
                 <td><span><b>Overall Score</b></span></td>
                 <td>{{overallScore}}</td>
-                <td>{{overallTrend}}</td>
             </tr>
         </tbody>
     </table>
@@ -63,18 +55,13 @@
     <div class="error-message" ng-show="incompleteResponses">Please answer the first two questions.</div>
     <div class="success-message" ng-show="dailyBalanceSubmitted">Successfully submitted today's balance chart.</div>
 </div><div class="chart-guide">
-    <div class="card"><span>Note: Trends are shown once you fill the score.</span></div>
-    <div class="card"><span>Green (G) - Under control</span></div>
-    <div class="card"><span>Yellow (Y) - Trending slightly down or slightly below expectation</span></div>
-    <div class="card"><span>Red (R) - Trending down or much below expectation, requesting assistance</span></div>
     <div class="card">
         <span>Fill in &#9733;'s in the rows that impacted your scoring</span>
         <span>&#9733; Extremely negative</span>
         <span>&#9733; &#9733; Very negative</span>
         <span>&#9733; &#9733; &#9733; Negative impact</span>
-        <span>&#9733; &#9733; &#9733; &#9733; Extremely positive</span>
+        <span>&#9733; &#9733; &#9733; &#9733; Positive impact</span>
         <span>&#9733; &#9733; &#9733; &#9733; &#9733; Very positive</span>
-        <span>&#9733; &#9733; &#9733; &#9733; &#9733; &#9733; Positive impact</span>
+        <span>&#9733; &#9733; &#9733; &#9733; &#9733; &#9733; Extremely positive</span>
     </div>
-    <div class="card"><span>Collect this data for a minimum of 7 straight days prior to starting Engineering Happiness. This is your baseline data.</span></div>
 </div>

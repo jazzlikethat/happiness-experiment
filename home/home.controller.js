@@ -13,38 +13,45 @@
         vm.showDashboard = false;
         vm.showLesson = false;
         vm.showQuestionnaire = false;
+        vm.showQuestionnaire2 = false;
         vm.showDailyBalanceChart = false;
 
         vm.goToQuestionnaire = goToQuestionnaire;
+        vm.goToQuestionnaire2 = goToQuestionnaire2;
         vm.goToDailyBalanceChart = goToDailyBalanceChart;
         vm.goToDashboard = goToDashboard;
         vm.goToLesson = goToLesson;
 
-        function goToQuestionnaire(){
-            vm.showDashboard = false;
-            vm.showLesson = false;
-            vm.showDailyBalanceChart = false;
-            vm.showQuestionnaire = true;
-        }
-
-        function goToDailyBalanceChart() {
+        function hideAll() {
             vm.showDashboard = false;
             vm.showLesson = false;
             vm.showQuestionnaire = false;
+            vm.showQuestionnaire2 = false;
+            vm.showDailyBalanceChart = false;
+        }
+
+        function goToQuestionnaire(){
+            hideAll();
+            vm.showQuestionnaire = true;
+        }
+
+        function goToQuestionnaire2() {
+            hideAll();
+            vm.showQuestionnaire2 = true;
+        }
+
+        function goToDailyBalanceChart() {
+            hideAll();
             vm.showDailyBalanceChart = true;
         }
 
         function goToDashboard() {
-            vm.showLesson = false;
-            vm.showQuestionnaire = false;
-            vm.showDailyBalanceChart = false;
+            hideAll();
             vm.showDashboard = true;
         }
 
         function goToLesson() {
-            vm.showDashboard = false;
-            vm.showQuestionnaire = false;
-            vm.showDailyBalanceChart = false;
+            hideAll();
             vm.showLesson = true;
         }
 
@@ -52,7 +59,6 @@
             $timeout(function(){
                 vm.hideSpinner = true;
             }, 1000);
-            console.log('Time to hide the spinner');
             var userData = AppGlobalConstants.userData;
             if (!userData.hasFilledQuestionnaire) {
                 vm.showQuestionnaire = true;
@@ -60,6 +66,9 @@
             else if (!userData.hasFilledDailyBalanceChartToday) {
                 vm.showDailyBalanceChart = true;
             } else {
+                vm.showDashboard = true;
+            }
+            else {
                 vm.showDashboard = true;
             }
         }

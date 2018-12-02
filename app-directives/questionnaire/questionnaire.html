@@ -1,6 +1,6 @@
 <div class="questionnaire">
     <div class="table-container">
-        <table ng-show="!questionnaireSubmitted">
+        <table>
             <tr>
                 <th class="question"></th>
                 <th class="option">Strongly disagree</th>
@@ -10,28 +10,33 @@
                 <th class="option">Moderately agree</th>
                 <th class="option">Strongly agree</th>
             </tr>
-            <tr class="question-row" ng-repeat="question in allQuestions" ng-show="(curPage * 5 <= $index) && ((curPage + 1) * 5 > $index)" ng-class="{highlight: ($odd && curPage % 2 === 0) || ($even && curPage % 2 !== 0)}">
+            <tr class="question-row" ng-repeat="question in allQuestions" ng-show="(curPage * 5 <= $index) && ((curPage + 1) * 5 > $index)" ng-class="{highlight: ($odd && curPage % 2 === 0) || ($even && curPage % 2 !== 0), invalid: (question.invalid)}">
                 <td class="question">{{question.text}}</td>
-                <td class="option"><input type="radio" name="{{question.text}}" value="6" ng-model="question['value']"></td>
-                <td class="option"><input type="radio" name="{{question.text}}" value="5" ng-model="question['value']"></td>
-                <td class="option"><input type="radio" name="{{question.text}}" value="4" ng-model="question['value']"></td>
-                <td class="option"><input type="radio" name="{{question.text}}" value="3" ng-model="question['value']"></td>
-                <td class="option"><input type="radio" name="{{question.text}}" value="2" ng-model="question['value']"></td>
-                <td class="option"><input type="radio" name="{{question.text}}" value="1" ng-model="question['value']"></td>
+                <td class="option"><input type="radio" name="{{question.text}}" value="6" ng-model="question['value']" ng-disabled="questionnaireSubmitted"></td>
+                <td class="option"><input type="radio" name="{{question.text}}" value="5" ng-model="question['value']" ng-disabled="questionnaireSubmitted"></td>
+                <td class="option"><input type="radio" name="{{question.text}}" value="4" ng-model="question['value']" ng-disabled="questionnaireSubmitted"></td>
+                <td class="option"><input type="radio" name="{{question.text}}" value="3" ng-model="question['value']" ng-disabled="questionnaireSubmitted"></td>
+                <td class="option"><input type="radio" name="{{question.text}}" value="2" ng-model="question['value']" ng-disabled="questionnaireSubmitted"></td>
+                <td class="option"><input type="radio" name="{{question.text}}" value="1" ng-model="question['value']" ng-disabled="questionnaireSubmitted"></td>
             </tr>
         </table>
+    </div>
+    <div class="prev-next">
+        <button type="button" class="btn" ng-click="curPage = curPage - 1" ng-disabled="curPage === 0">Previous</button>
+        <div class="page-number" ng-repeat="page in paginationArray" ng-click="switchToPage(page.value)" ng-class="{active: (page.value === curPage), underline: (page.underline)}">{{page.value + 1}}</div>
+        <button type="button" class="btn" ng-click="curPage = curPage + 1" ng-disabled="curPage + 1 > allQuestions.length / 5">Next</button>
+    </div>
+    <div class="submit-button">
+        <button type="button" class="btn btn-primary" ng-click="submitQuestionnaire()" ng-disabled="questionnaireSubmitted">Submit</button>
     </div>
     <div ng-show="questionnaireSubmitted">
         <p>Score: {{questionnaireApiResponse.score}}</p>
         <p>Description: {{questionnaireApiResponse.description}}</p>
         <p>Interpretation: {{questionnaireApiResponse.interpretation}}</p>
     </div>
-    <div ng-show="!questionnaireSubmitted" class="prev-next">
-        <button type="button" class="btn" ng-click="curPage = curPage - 1" ng-disabled="curPage === 0">Previous</button>
-        <div class="page-number" ng-repeat="page in paginationArray" ng-click="switchToPage(page)" ng-class="{active: (page === curPage)}">{{page + 1}}</div>
-        <button type="button" class="btn" ng-click="curPage = curPage + 1" ng-disabled="curPage + 1 > allQuestions.length / 5">Next</button>
-    </div>
-    <div class="submit-button">
-        <button type="button" class="btn btn-primary" ng-click="submitQuestionnaire()" ng-show="!questionnaireSubmitted">Submit</button>
+    <div class="invalid-form" ng-show="invalidResponse">
+        <span>Please answer all the questions.</span>
+        <br>
+        <span>Unanswered questions and page numbers have been underlined in red color.</span>
     </div>
 </div>
