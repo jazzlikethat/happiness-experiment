@@ -150,6 +150,41 @@
 }
 
 /* ---------------------------------------------------
+  STANFORD QUESTIONNAIRE
+----------------------------------------------------- */
+.stanford-questionnaire {
+  /* width: 540px; */
+}
+.stanford-questionnaire .question {
+  margin: 30px 0;
+  padding: 5px;
+  overflow: auto;
+  width: initial;
+}
+.stanford-questionnaire .title {
+  margin-bottom: 5px;
+  font-size: 120%;
+}
+.stanford-questionnaire .response-container {
+  overflow: auto;
+  padding-left: 50px;
+}
+.stanford-questionnaire .score-description {
+  float: left;
+  min-width: 175px;
+}
+.stanford-questionnaire .score {
+  float: left;
+  margin: 0 15px;
+}
+.stanford-questionnaire .score span {
+  padding: 0 15px;
+}
+.stanford-questionnaire .success {
+  text-align: center;
+}
+
+/* ---------------------------------------------------
   DAILY BALANCE CHART
 ----------------------------------------------------- */
 .daily-balance-container .chart-table {
