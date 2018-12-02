@@ -60,6 +60,9 @@
             else if (!userData.hasFilledDailyBalanceChartToday) {
                 vm.showDailyBalanceChart = true;
             }
+            else {
+                vm.showDashboard = true;
+            }
         }
 
         $rootScope.$on('fetchUserDataComplete', hideSpinner);
