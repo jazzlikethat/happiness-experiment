@@ -68,9 +68,6 @@
             } else {
                 vm.showDashboard = true;
             }
-            else {
-                vm.showDashboard = true;
-            }
         }
 
         $rootScope.$on('fetchUserDataComplete', hideSpinner);
