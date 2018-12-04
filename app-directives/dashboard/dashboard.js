@@ -71,7 +71,7 @@
                             "min-value":1,
                             label: {
                               text: 'Days',
-                              backgroundColor: '#ffe6e6',
+                              backgroundColor: '#e7e7ff',
                               borderColor: 'green',
                               borderRadius: 3,
                               borderWidth: 1,
@@ -87,7 +87,7 @@
                             values: '0:20:5',
                             label: {
                               text: 'Daily Score',
-                              backgroundColor: '#ffe6e6',
+                              backgroundColor: '#e7e7ff',
                               borderColor: 'green',
                               borderRadius: 3,
                               borderWidth: 1,
