@@ -10,6 +10,12 @@
   background-color: #aaf9aa;
   padding-top: 250px;
 }
+.sidebar .logo {
+  position: fixed;
+  top: 25px;
+  left: 60px;
+  cursor: pointer;
+}
 .sidebar .sidebar-button {
   padding: 5px 0 5px 25px;
   cursor: pointer;
