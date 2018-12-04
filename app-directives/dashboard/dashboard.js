@@ -45,15 +45,99 @@
                         vm.monthlyRoutine[i].balanceChart.push(entry);
                     }
 
+
+                    //////////
+                    
+                    
                     zingchart.render({
                         id: 'myChart',
                         data: {
                           type: 'area',
+                          plot : {
+                            aspect : 'spline',
+                            animation:{
+                                delay:400,
+                                effect:3,
+                                speed:500,
+                                method:"ANIMATION_BOUNCE_EASE_OUT",
+                                sequence:0
+                            },
+                          },
                           title: {
                             textAlign: 'center',
                             text: "Daily Balance Activity Chart"
                           },
                           scaleX: {
+                            "min-value":1,
+                            label: {
+                              text: 'Days',
+                              backgroundColor: '#ffe6e6',
+                              borderColor: 'green',
+                              borderRadius: 3,
+                              borderWidth: 1,
+                              fontColor: 'green',
+                              fontFamily: 'Georgia',
+                              fontSize: 16,
+                              fontStyle: 'normal',
+                              fontWeight: 'normal',
+                              padding: '5px 20px'
+                            }
+                          },
+                          scaleY: {
+                            values: '0:20:5',
+                            label: {
+                              text: 'Daily Score',
+                              backgroundColor: '#ffe6e6',
+                              borderColor: 'green',
+                              borderRadius: 3,
+                              borderWidth: 1,
+                              fontColor: 'green',
+                              fontFamily: 'Georgia',
+                              fontSize: 16,
+                              fontStyle: 'normal',
+                              fontWeight: 'normal',
+                              padding: '3px 20px'
+                            }
+                          },
+                          series: [{
+                            values: scoresArray,
+                          }]
+                        }
+                    });
+
+                    
+                    ///////////
+
+
+
+                    /////
+
+                    /*
+                    var myConfig = {
+                        "layout":"h",
+                         "globals":{
+                            "font-family":"Roboto"
+                        },
+                        "graphset":[
+                            
+                            {
+                            type: 'area',
+                          plot : {
+                            aspect : 'spline',
+                            animation:{
+                                delay:400,
+                                effect:3,
+                                speed:500,
+                                method:"ANIMATION_BOUNCE_EASE_OUT",
+                                sequence:0
+                            },
+                          },
+                          title: {
+                            textAlign: 'center',
+                            text: "Daily Balance Activity Chart"
+                          },
+                          scaleX: {
+                            "min-value":1,
                             label: {
                               text: 'Days',
                               backgroundColor: '#ffe6e6',
@@ -87,9 +171,87 @@
                           series: [{
                             values: scoresArray,
                           }]
-                        }
+                            },
+                            {
+                                "type":"pie",
+                                "scale":{
+                                    "size-factor":1.0
+                                  },
+                                "background-color":"#F4F4F4",
+                                "legend":{
+                                    "background-color":"none",
+                                    "border-width":0,
+                                    "shadow":false,
+                                    "layout":"float",
+                                    "margin":"auto auto 16% auto",
+                                    "marker":{
+                                        "border-radius":3,
+                                        "border-width":0
+                                    },
+                                    "item":{
+                                        "color":"%backgroundcolor"
+                                    }
+                                },
+                                "title":{
+                                    "text":"Lessons",
+                                    "background-color":"none",
+                                    "color":"#626262",
+                                    "font-size":16,
+                                    "x":-52,
+                                    "y":80
+                                },
+                                "plotarea":{
+                                    "border-color":"#DFE1E3",
+                                    "border-width":1,
+                                    "border-radius":3,
+                                    "margin":"15% 5%"
+                                },
+                                "labels":[
+                                    {
+                                        "x":"45%",
+                                        "y":"47%",
+                                        "width":"10%",
+                                        "text":"2 Lessons Remaining",
+                                        "font-size":14
+                                    }    
+                                ],
+                                "plot":{
+                                    "size":50,
+                                    "slice":70,
+                                    "border-width":0,
+                                    "shadow":0,
+                                    "value-box":{
+                                        "visible":false
+                                    },
+                                     "tooltip":{
+                                        "text":"%v",
+                                        "shadow":false,
+                                        "border-radius":3
+                                    }
+                                },
+                                "series":[
+                                    {
+                                        "values":[1],
+                                        "text":"Lessons Completed",
+                                        "background-color":"#6CCFDF"
+                                    },
+                                    {
+                                        "values":[3],
+                                        "text":"Total Lessons",
+                                        "background-color":"#E76D45"
+                                    }
+                                ]
+                            }
+                        ]
+                    };
+                   
+                    zingchart.render({ 
+                        id : 'myChart', 
+                        data : myConfig, 
                     });
 
+                    */
+                    ////
                 }
 
                 vm.$on('fetchUserDataComplete', evalMonthlyRoutine);

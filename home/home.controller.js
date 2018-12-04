@@ -15,7 +15,7 @@
         vm.showQuestionnaire = false;
         vm.showQuestionnaire2 = false;
         vm.showDailyBalanceChart = false;
-        
+
         vm.goToQuestionnaire = goToQuestionnaire;
         vm.goToQuestionnaire2 = goToQuestionnaire2;
         vm.goToDailyBalanceChart = goToDailyBalanceChart;
@@ -65,8 +65,7 @@
             }
             else if (!userData.hasFilledDailyBalanceChartToday) {
                 vm.showDailyBalanceChart = true;
-            }
-            else {
+            } else {
                 vm.showDashboard = true;
             }
         }
