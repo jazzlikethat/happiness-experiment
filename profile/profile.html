@@ -83,7 +83,7 @@
                                                 <label style="font-weight:bold;">First Name</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                                 <input type="text" placeholder="First Name" class="form-control">
+                                                 <input type="text" placeholder="First Name" ng-model="vm.fName" class="form-control">
                                             </div>
                                     </div>
                                      <hr />
@@ -92,7 +92,7 @@
                                                 <label style="font-weight:bold;">Last Name</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                                 <input type="text" placeholder="Last Name" class="form-control">
+                                                 <input type="text" placeholder="Last Name" ng-model="vm.lName" class="form-control">
                                             </div>
                                     </div>
                                      <hr />
@@ -101,7 +101,7 @@
                                                 <label style="font-weight:bold;">Phone Number</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                                 <input type="text" placeholder="Phone Number" class="form-control">
+                                                 <input type="text" placeholder="Phone Number" ng-model="vm.primaryPhoneNumber" class="form-control">
                                             </div>
                                     </div>
                                     <hr />
@@ -110,7 +110,7 @@
                                                 <label style="font-weight:bold;">User Name</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                                 <input type="text" placeholder="User Name" class="form-control">
+                                                 <input type="text" placeholder="User Name" ng-model="vm.userID" class="form-control">
                                             </div>
                                     </div>
                                     <hr />
@@ -119,14 +119,17 @@
                                                 <label style="font-weight:bold;">Change Photo</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                                    <input id="Upload photo" name="Upload photo" class="input-file" type="file">
+                                                <input id="Upload photo" name="Upload photo" class="input-file" type="file">
                                             </div>
                                     </div>
                                      <hr />
                                      <div class="col-sm-offset-2 col-sm-10">
                                             <div class="pull-right">
-                                              <button type="submit" class="btn btn-default">Cancel</button>
-                                              <button type="submit" class="btn btn-primary">Save</button>
+                                              <button type="submit" class="btn btn-default" ng-click="vm.cancelsave()">Cancel</button>
+                                              <button type="submit" class="btn btn-primary" ng-click="vm.saveProfile()">Save</button>
+                                            </div>
+                                            <div class="success-message" ng-show="vm.showSuccessMessage">
+                                                Successfully saved user details
                                             </div>
                                     </div>
                                  

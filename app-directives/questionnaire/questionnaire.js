@@ -17,6 +17,8 @@
                 vm.questionnaireApiResponse = {};
                 vm.questionnaireSubmitted = false;
                 vm.invalidResponse = false;
+                vm.showThought2 = false;
+                vm.showQuestionnaire = false;
 
                 vm.paginationArray = [];
                 for (var m = 0; m < vm.allQuestions.length / 5; m++) {
@@ -28,10 +30,22 @@
                 }
                 
                 vm.switchToPage = switchToPage;
+                vm.goToQuestionnaire = goToQuestionnaire;
+                vm.openTodaysThought = openTodaysThought;
                 vm.submitQuestionnaire = submitQuestionnaire;
 
                 function switchToPage(page) {
                     vm.curPage = page;
+                }
+
+                function goToQuestionnaire() {
+                    vm.showQuestionnaire = true;
+                    vm.showThought2 = false;
+                }
+
+                function openTodaysThought() {
+                    vm.showQuestionnaire = false;
+                    vm.showThought2 = true;
                 }
         
                 function submitQuestionnaire() {
@@ -80,6 +94,25 @@
                         vm.questionnaireApiResponse = response.data;
                     })
                 }
+
+                function evalUserData() {
+                    var userData = AppGlobalConstants.userData;
+                    vm.questionnaireSubmitted = userData.hasFilledQuestionnaire;
+                    if (vm.questionnaireSubmitted) {
+                        vm.showQuestionnaire = true;
+                        var responses = userData.questionnaireResponses;
+                        for (var i = 0; i < vm.allQuestions.length; i++) {
+                            vm.allQuestions[i].value = responses[i].toString();
+                        }
+                        submitQuestionnaire();
+                    }
+                    else {
+                        vm.showThought1 = true;
+                    }
+                    cancelEvent();
+                }
+
+                var cancelEvent = vm.$on('fetchUserDataComplete', evalUserData);
             }
         }
     }

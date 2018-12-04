@@ -1,3 +1,8 @@
+<div class="thought-two" ng-show="showThought2">
+    <ng-include src="app-directives/thoughts/thought2.html"></ng-include>
+    <button class="btn" ng-click="goToQuestionnaire()">Open Questionnaire</button>
+</div>
+
 <div class="questionnaire">
     <div class="table-container">
         <table>
@@ -27,6 +32,7 @@
         <button type="button" class="btn" ng-click="curPage = curPage + 1" ng-disabled="curPage + 1 > allQuestions.length / 5">Next</button>
     </div>
     <div class="submit-button">
+        <button type="button" class="btn" ng-click="openTodaysThought()" ng-disabled="questionnaireSubmitted">Open Today's Thought</button>
         <button type="button" class="btn btn-primary" ng-click="submitQuestionnaire()" ng-disabled="questionnaireSubmitted">Submit</button>
     </div>
     <div ng-show="questionnaireSubmitted">

@@ -59,13 +59,23 @@
             $timeout(function(){
                 vm.hideSpinner = true;
             }, 1000);
+            
+            // Check if its Day 1 or Day 2 or Day 3. Views change according to the day
             var userData = AppGlobalConstants.userData;
-            if (!userData.hasFilledQuestionnaire) {
+
+            if (!userData.hasFilledStanfordQuestionnaire) {
+                // First day
                 vm.showQuestionnaire = true;
             }
+            else if (!userData.hasFilledQuestionnaire) {
+                // Second day
+                vm.showQuestionnaire2 = true;
+            }
             else if (!userData.hasFilledDailyBalanceChartToday) {
+                // Third day
                 vm.showDailyBalanceChart = true;
-            } else {
+            }
+            else {
                 vm.showDashboard = true;
             }
         }

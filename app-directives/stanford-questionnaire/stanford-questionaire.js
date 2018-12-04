@@ -14,13 +14,27 @@
                 var vm = scope;
                 vm.stanfordQuestionnaireSubmitted = false;
                 vm.invalidStanfordResponse = false;
+                vm.showStanfordQuestionnaire = false;
+                vm.showThought1 = false;
 
                 vm.responseOne = 0;
                 vm.responseTwo = 0;
                 vm.responseThree = 0;
                 vm.responseFour = 0;
 
+                vm.goToStanfordQs = goToStanfordQs;
+                vm.openTodaysThought = openTodaysThought;
                 vm.submitStanfordQuestionnaire = submitStanfordQuestionnaire;
+
+                function goToStanfordQs() {
+                    vm.showStanfordQuestionnaire = true;
+                    vm.showThought1 = false;
+                }
+
+                function openTodaysThought() {
+                    vm.showStanfordQuestionnaire = false;
+                    vm.showThought1 = true;
+                }
 
                 function submitStanfordQuestionnaire() {
                     if (vm.responseOne === 0 || vm.responseTwo === 0 || vm.responseThree === 0 || vm.responseFour === 0) {
@@ -44,6 +58,24 @@
                         vm.stanfordQuestionnaireSubmitted = true;
                     })
                 }
+
+                function evalUserData() {
+                    var userData = AppGlobalConstants.userData;
+                    vm.stanfordQuestionnaireSubmitted = userData.hasFilledStanfordQuestionnaire;
+                    if (vm.stanfordQuestionnaireSubmitted) {
+                        vm.showStanfordQuestionnaire = true;
+                        vm.responseOne = userData.stanfordQuestionnaireResponses[0].toString();
+                        vm.responseTwo = userData.stanfordQuestionnaireResponses[1].toString();
+                        vm.responseThree = userData.stanfordQuestionnaireResponses[2].toString();
+                        vm.responseFour = userData.stanfordQuestionnaireResponses[3].toString();
+                    }
+                    else {
+                        vm.showThought1 = true;
+                    }
+                    cancelEvent();
+                }
+
+                var cancelEvent = vm.$on('fetchUserDataComplete', evalUserData);
             }
         }
     }

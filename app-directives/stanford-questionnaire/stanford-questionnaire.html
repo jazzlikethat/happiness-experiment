@@ -1,4 +1,9 @@
-<div class="questionnaire stanford-questionnaire">
+<div class="thought-one" ng-show="showThought1">
+    <ng-include src="app-directives/thoughts/thought1.html"></ng-include>
+    <button class="btn" ng-click="goToStanfordQs()">Open Questionnaire</button>
+</div>
+
+<div class="questionnaire stanford-questionnaire" ng-show="showStanfordQuestionnaire">
     <div class="question">
         <div class="title">1. In general, I consider myself:</div>
         <div class="response-container">
@@ -66,6 +71,7 @@
         </div>
     </div>
     <div class="submit-button">
+        <button type="button" class="btn" ng-click="openTodaysThought()" ng-disabled="stanfordQuestionnaireSubmitted">Open Today's Thought</button>
         <button type="button" class="btn btn-primary" ng-click="submitStanfordQuestionnaire()" ng-disabled="stanfordQuestionnaireSubmitted">Submit</button>
     </div>
     <div class="invalid-form" ng-show="invalidStanfordResponse">
