@@ -23,7 +23,7 @@
                 vm.responseFour = 0;
 
                 vm.goToStanfordQs = goToStanfordQs;
-                vm.templateUrl = templateUrl;
+                vm.templateUrlForThoughtOne = templateUrlForThoughtOne;
                 vm.openTodaysThought = openTodaysThought;
                 vm.submitStanfordQuestionnaire = submitStanfordQuestionnaire;
 
@@ -32,7 +32,7 @@
                     vm.showThought1 = false;
                 }
 
-                function templateUrl() {
+                function templateUrlForThoughtOne() {
                     return "/app-directives/thoughts/thought1.html";
                 }
 
