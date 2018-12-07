@@ -56,9 +56,7 @@
         }
 
         function hideSpinner(){
-            $timeout(function(){
-                vm.hideSpinner = true;
-            }, 1000);
+            vm.hideSpinner = true;
             
             // Check if its Day 1 or Day 2 or Day 3. Views change according to the day
             var userData = AppGlobalConstants.userData;
