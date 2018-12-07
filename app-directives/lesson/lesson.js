@@ -16,6 +16,7 @@
                 vm.lessons = null;
                 vm.thoughtNumber = 1;
                 vm.lesson1Submitted = false;
+                vm.lesson2Submitted = false;
                 vm.lesson3Submitted = false;
 
                 vm.showWeeklyOverview = true;
@@ -29,7 +30,27 @@
                 vm.submitLesson = submitLesson;
                 vm.switchToDailyBalanceChart = switchToDailyBalanceChart;
 
+                vm.dayCount = 1;
+
+                function evalLessonTwoAndDays() {
+                    var userData = AppGlobalConstants.userData;
+                    var monthlyRoutine = userData.balanceChart;
+                    if (monthlyRoutine.length > 0) {
+                        setLesson2Complete();
+                        vm.dayCount = 3 + monthlyRoutine.length;
+                    }
+                    else if (userData.hasFilledQuestionnaire) {
+                        vm.dayCount = 3;
+                    }
+                    else if (userData.hasFilledStanfordQuestionnaire) {
+                        vm.dayCount = 2;
+                    }
+                }
+
                 function fetchLessons(){
+
+                    evalLessonTwoAndDays();
+
                     $http({
                         url: AppGlobalConstants.baseURL + '/lesson?page=1 ',
                         method: "GET",
@@ -51,11 +72,14 @@
                     if (num === 1) {
                         vm.showLessonOne = true;
                     }
-                    else if (num ===2) {
+                    else if (num === 2 && vm.dayCount >= 3) {
                         vm.showLessonTwo = true;
                     }
-                    else if (num === 3) {
+                    else if (num === 3 && vm.dayCount >= 8) {
                         vm.showLessonThree = true;
+                    }
+                    else {
+                        vm.showWeeklyOverview = true;
                     }
                 }
 
@@ -132,6 +156,12 @@
                     }
                 }
 
+                function setLesson2Complete() {
+                    vm.lesson2Submitted = true;
+                    cancelEvent();
+                }
+
+                var cancelEvent = vm.$on('updateMonthlyRoutine', setLesson2Complete);
                 vm.$on('fetchUserDataComplete', fetchLessons);
             }
         }

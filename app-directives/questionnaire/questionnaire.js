@@ -31,8 +31,9 @@
                 
                 vm.switchToPage = switchToPage;
                 vm.goToQuestionnaire = goToQuestionnaire;
-                vm.openTodaysThought = openTodaysThought;
+                vm.openThoughtTwo = openThoughtTwo;
                 vm.submitQuestionnaire = submitQuestionnaire;
+                vm.templateUrlForThoughtTwo = templateUrlForThoughtTwo;
 
                 function switchToPage(page) {
                     vm.curPage = page;
@@ -43,7 +44,7 @@
                     vm.showThought2 = false;
                 }
 
-                function openTodaysThought() {
+                function openThoughtTwo() {
                     vm.showQuestionnaire = false;
                     vm.showThought2 = true;
                 }
@@ -95,6 +96,10 @@
                     })
                 }
 
+                function templateUrlForThoughtTwo() {
+                    return "/app-directives/thoughts/thought2.html";
+                }
+
                 function evalUserData() {
                     var userData = AppGlobalConstants.userData;
                     vm.questionnaireSubmitted = userData.hasFilledQuestionnaire;
@@ -107,7 +112,7 @@
                         submitQuestionnaire();
                     }
                     else {
-                        vm.showThought1 = true;
+                        vm.showThought2 = true;
                     }
                     cancelEvent();
                 }

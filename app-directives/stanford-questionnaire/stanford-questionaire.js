@@ -23,12 +23,17 @@
                 vm.responseFour = 0;
 
                 vm.goToStanfordQs = goToStanfordQs;
+                vm.templateUrl = templateUrl;
                 vm.openTodaysThought = openTodaysThought;
                 vm.submitStanfordQuestionnaire = submitStanfordQuestionnaire;
 
                 function goToStanfordQs() {
                     vm.showStanfordQuestionnaire = true;
                     vm.showThought1 = false;
+                }
+
+                function templateUrl() {
+                    return "/app-directives/thoughts/thought1.html";
                 }
 
                 function openTodaysThought() {

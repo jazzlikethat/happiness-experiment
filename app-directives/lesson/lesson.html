@@ -3,8 +3,8 @@
     <div class="week-container">
         <div class="left-half">
             <div class="title">Lessons</div>
-            <div class="lesson" ng-click="openLesson(1)">1. What is Happiness?</div>
-            <div class="lesson" ng-click="openLesson(2)">2. Daily Balance Chart</div>
+            <div class="lesson" ng-class="{disabled: (dayCount < 1)}" ng-click="openLesson(1)">1. What is Happiness? <span ng-show="lesson1Submitted">&#9989;</span></div>
+            <div class="lesson" ng-class="{disabled: (dayCount < 3)}" ng-click="openLesson(2)">2. Daily Balance Chart <span ng-show="lesson2Submitted">&#9989;</span></div>
         </div>
         <div class="right-half">
             <div class="title">Thoughts</div>
@@ -21,7 +21,7 @@
     <div class="week-container">
         <div class="left-half">
             <div class="title">Lessons</div>
-            <div class="lesson" ng-click="openLesson(3)">3. What Truly Matters and 2019 Focus</div>
+            <div class="lesson" ng-class="{disabled: (dayCount < 8)}" ng-click="openLesson(3)">3. What Truly Matters and 2019 Focus <span ng-show="lesson3Submitted">&#9989;</span></div>
         </div>
         <div class="right-half">
             <div class="title">Thoughts</div>

@@ -107,9 +107,10 @@
                         balanceChart: data
                     });
                     evalMonthlyRoutine();
+                    cancelEvent();
                 }
 
-                vm.$on('updateMonthlyRoutine', updateMonthlyRoutine);
+                var cancelEvent = vm.$on('updateMonthlyRoutine', updateMonthlyRoutine);
                 vm.$on('fetchUserDataComplete', evalMonthlyRoutine);
 
                 

@@ -368,6 +368,12 @@
 .week-container .lesson:hover, .week-container .thought:hover {
   background-color: #f0f0f0;
 }
+.week-container .lesson.disabled, .week-container .thought.disabled {
+  color: #8e9aa4;
+}
+.week-container .lesson.disabled:hover, .week-container .thought.disabled:hover {
+  cursor: not-allowed;
+}
 .lesson-container .lesson-number {
   font-style: italic;
   margin: 25px 0 5px;
