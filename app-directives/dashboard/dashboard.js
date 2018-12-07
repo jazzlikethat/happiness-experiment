@@ -27,6 +27,7 @@
 
                     scoresArray = [];
 
+                    vm.userData = AppGlobalConstants.userData;
                     vm.monthlyRoutine = AppGlobalConstants.userData.balanceChart;
 
                     vm.monthlyRoutine.sort(function(a,b) {
@@ -48,7 +49,7 @@
 
                     //////////
                     
-                    
+                 /*   
                     zingchart.render({
                         id: 'myChart',
                         data: {
@@ -105,23 +106,28 @@
                         }
                     });
 
-                    
+                    */
                     ///////////
 
 
 
                     /////
 
-                    /*
+              
                     var myConfig = {
                         "layout":"h",
                          "globals":{
-                            "font-family":"Roboto"
+                            "font-family":"Arial,sans-serif",
+                            "font-size" : "24px",
                         },
                         "graphset":[
                             
                             {
                             type: 'area',
+                            "x": "0%",
+                            "y":"10%",
+                            "height":"80%",
+                            "width":"75%",  
                           plot : {
                             aspect : 'spline',
                             animation:{
@@ -140,11 +146,11 @@
                             "min-value":1,
                             label: {
                               text: 'Days',
-                              backgroundColor: '#ffe6e6',
-                              borderColor: 'red',
+                              backgroundColor: '#e7e7ff',
+                              borderColor: 'blue',
                               borderRadius: 3,
                               borderWidth: 1,
-                              fontColor: 'red',
+                              fontColor: 'blue',
                               fontFamily: 'Georgia',
                               fontSize: 16,
                               fontStyle: 'normal',
@@ -156,11 +162,11 @@
                             values: '0:20:5',
                             label: {
                               text: 'Daily Score',
-                              backgroundColor: '#ffe6e6',
-                              borderColor: 'red',
+                              backgroundColor: '#e7e7ff',
+                              borderColor: 'blue',
                               borderRadius: 3,
                               borderWidth: 1,
-                              fontColor: 'red',
+                              fontColor: 'blue',
                               fontFamily: 'Georgia',
                               fontSize: 16,
                               fontStyle: 'normal',
@@ -173,75 +179,158 @@
                           }]
                             },
                             {
-                                "type":"pie",
-                                "scale":{
-                                    "size-factor":1.0
-                                  },
-                                "background-color":"#F4F4F4",
-                                "legend":{
-                                    "background-color":"none",
-                                    "border-width":0,
-                                    "shadow":false,
-                                    "layout":"float",
-                                    "margin":"auto auto 16% auto",
-                                    "marker":{
-                                        "border-radius":3,
-                                        "border-width":0
-                                    },
-                                    "item":{
-                                        "color":"%backgroundcolor"
-                                    }
-                                },
+                                "type":"ring",
+                                "height":"70%",
+                                "width":"30%",
+                                "x":"72%",
+                                "y":"10%",
                                 "title":{
-                                    "text":"Lessons",
-                                    "background-color":"none",
-                                    "color":"#626262",
-                                    "font-size":16,
-                                    "x":-52,
-                                    "y":80
+                                  "text":"Lesson Progress"
+                                },
+                                "plot":{
+                                  "value-box":{
+                                    "text":"<b>"+ vm.userData.lessonCompleted+" </b> <br/> lessons completed",
+                                    "placement":"center",
+                                    "font-color":"black",
+                                    "font-size":25,
+                                    "font-family":"Georgia",
+                                    "font-weight":"normal",
+                                    "rules":[
+                                      {
+                                        "rule":"%p != 0",
+                                        "visible":false
+                                      }
+                                    ]
+                                  },
+                                  "tooltip":{
+                                    "text":"%t: %v (%npv%)",
+                                    "font-color":"black",
+                                    "font-family":"Georgia",
+                                    "text-alpha":1,
+                                    "background-color":"white",
+                                    "alpha":0.7,
+                                    "border-width":1,
+                                    "border-color":"#cccccc",
+                                    "line-style":"dotted",
+                                    "border-radius":"10px",
+                                    "padding":"10%",
+                                    "placement":"node:center"
+                                  },
+                                  "slice":"50%",
+                                  "border-width":1,
+                                  "border-color":"#cccccc",
+                                  "line-style":"dotted"
                                 },
                                 "plotarea":{
-                                    "border-color":"#DFE1E3",
-                                    "border-width":1,
-                                    "border-radius":3,
-                                    "margin":"15% 5%"
-                                },
-                                "labels":[
-                                    {
-                                        "x":"45%",
-                                        "y":"47%",
-                                        "width":"10%",
-                                        "text":"2 Lessons Remaining",
-                                        "font-size":14
-                                    }    
-                                ],
-                                "plot":{
-                                    "size":50,
-                                    "slice":70,
-                                    "border-width":0,
-                                    "shadow":0,
-                                    "value-box":{
-                                        "visible":false
-                                    },
-                                     "tooltip":{
-                                        "text":"%v",
-                                        "shadow":false,
-                                        "border-radius":3
-                                    }
+                                  "margin-top":"12%"
                                 },
                                 "series":[
-                                    {
-                                        "values":[1],
-                                        "text":"Lessons Completed",
-                                        "background-color":"#6CCFDF"
-                                    },
-                                    {
-                                        "values":[3],
-                                        "text":"Total Lessons",
-                                        "background-color":"#E76D45"
-                                    }
+                                  {
+                                    "values":[(3-vm.userData.lessonCompleted)],
+                                    "slice":"80%",
+                                    "text":"Remaining",
+                                    "background-color":"#C5DEFD",
+                                        "border-width":"0px",
+                                  },
+                                  {
+                                    "values":[vm.userData.lessonCompleted],
+                                    "slice":"80%",
+                                    "text":"Completed",
+                                             "background-color":"#85a1af",
+                                        "alpha":"0.5",
+                                        "border-color":"#85a1af",
+                                        "border-width":"1px",
+                                        "shadow":0
+                                  }
                                 ]
-                            }
+                              }
+                            // {
+                            //     "type":"pie",
+                            //     "height":"70%",
+                            //     "width":"30%",
+                            //     "x":"75%",
+                            //     "y":"10%",
+                            //     "background-color":"#ffffff",
+                            //      
+                            //     "title":{
+                            //         "text":"<strong>Lesson Progress</strong>",
+                            //         "text-align":"left",
+                            //         "background-color":"none",
+                            //         "font-color":"#000000"
+                            //     },
+                            //     "value-box":{
+                            //         "visible":true
+                            //     },
+                            //     "plotarea":{
+                            //         "margin":"20% 0% 0% 0%"
+                            //     },
+                            //     "plot":{
+                            //         "slice":50,
+                            //         "ref-angle":270,
+                            //         "detach":false,
+                            //         "hover-state":{
+                            //             "visible":false
+                            //         },
+                            //         "value-box":{
+                            //             "visible":true,
+                            //             "type":"first",
+                            //             "connected":false,
+                            //             "placement":"center",
+                            //             "text":vm.userData.lessonCompleted+" completed", //get from API
+                            //             "rules":[
+                               
+                            //             ],
+                            //             "font-color":"#000000",
+                            //             "font-size":"13px"
+                            //         },
+                            //         "tooltip":{
+                            //             "rules":[
+                            //                 {
+                            //                     "rule":"%v == 1",
+                            //                     "text":"%v completed",
+                            //                     "shadow":true,
+                            //                     "border-radius":4
+                            //                 },
+                            //                 {
+                            //                     "rule":"%v == 2",
+                            //                     "text":"%v completed",
+                            //                     "shadow":false,
+                            //                     "border-radius":4
+                            //                 },
+                            //                 {
+                            //                     "rule":"%v == 3",
+                            //                     "text":"%v completed",
+                            //                     "shadow":false,
+                            //                     "border-radius":4
+                            //                 }
+                            //             ]
+                            //         },
+                            //         "animation":{
+                            //             "delay":0,
+                            //             "effect":2,
+                            //             "speed":"600",
+                            //             "method":"0",
+                            //             "sequence":"1"
+                            //         }
+                            //     },
+                            //     "series":[
+                            //         {
+                            //             "values":[vm.userData.lessonCompleted], //completed
+                            //             // "text":"Lessons",
+                            //             "background-color":"#C5DEFD",
+                            //             "border-width":"0px",
+                            //             "shadow":0
+                            //         },
+                            //         {
+                            //             "values":[(3-vm.userData.lessonCompleted)], //remaining
+                            //             "background-color":"#85a1af",
+                            //             "alpha":"0.5",
+                            //             "border-color":"#85a1af",
+                            //             "border-width":"1px",
+                            //             "shadow":0
+                            //         }
+                            //     ]
+                            // }
                         ]
                     };
                    
@@ -250,7 +339,7 @@
                         data : myConfig, 
                     });
 
-                    */
+                    
                     ////
                 }
 
