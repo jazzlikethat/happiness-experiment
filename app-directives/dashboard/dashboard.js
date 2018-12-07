@@ -27,6 +27,7 @@
 
                     scoresArray = [];
 
+                    vm.userData = AppGlobalConstants.userData;
                     vm.monthlyRoutine = AppGlobalConstants.userData.balanceChart;
 
                     vm.monthlyRoutine.sort(function(a,b) {
@@ -43,64 +44,149 @@
                         };
                         scoresArray.push(total_score);
                         vm.monthlyRoutine[i].balanceChart.push(entry);
-                    }                    
+                    }
                     
-                    zingchart.render({
-                        id: 'myChart',
-                        data: {
+                    var myConfig = {
+                      "layout":"h",
+                       "globals":{
+                          "font-family":"Arial,sans-serif",
+                          "font-size" : "24px",
+                      },
+                      "graphset":[
+                          
+                          {
                           type: 'area',
-                          plot : {
-                            aspect : 'spline',
-                            animation:{
-                                delay:400,
-                                effect:3,
-                                speed:500,
-                                method:"ANIMATION_BOUNCE_EASE_OUT",
-                                sequence:0
-                            },
+                          "x": "0%",
+                          "y":"10%",
+                          "height":"80%",
+                          "width":"75%",  
+                        plot : {
+                          aspect : 'spline',
+                          animation:{
+                              delay:400,
+                              effect:3,
+                              speed:500,
+                              method:"ANIMATION_BOUNCE_EASE_OUT",
+                              sequence:0
                           },
-                          title: {
-                            textAlign: 'center',
-                            text: "Daily Balance Activity Chart"
+                        },
+                        title: {
+                          textAlign: 'center',
+                          text: "Daily Balance Activity Chart"
+                        },
+                        scaleX: {
+                          "min-value":1,
+                          label: {
+                            text: 'Days',
+                            backgroundColor: '#e7e7ff',
+                            borderColor: 'blue',
+                            borderRadius: 3,
+                            borderWidth: 1,
+                            fontColor: 'blue',
+                            fontFamily: 'Georgia',
+                            fontSize: 16,
+                            fontStyle: 'normal',
+                            fontWeight: 'normal',
+                            padding: '5px 20px'
+                          }
+                        },
+                        scaleY: {
+                          values: '0:20:5',
+                          label: {
+                            text: 'Daily Score',
+                            backgroundColor: '#e7e7ff',
+                            borderColor: 'blue',
+                            borderRadius: 3,
+                            borderWidth: 1,
+                            fontColor: 'blue',
+                            fontFamily: 'Georgia',
+                            fontSize: 16,
+                            fontStyle: 'normal',
+                            fontWeight: 'normal',
+                            padding: '3px 20px'
+                          }
+                        },
+                        series: [{
+                          values: scoresArray,
+                        }]
                           },
-                          scaleX: {
-                            "min-value":1,
-                            label: {
-                              text: 'Days',
-                              backgroundColor: '#e7e7ff',
-                              borderColor: 'green',
-                              borderRadius: 3,
-                              borderWidth: 1,
-                              fontColor: 'green',
-                              fontFamily: 'Georgia',
-                              fontSize: 16,
-                              fontStyle: 'normal',
-                              fontWeight: 'normal',
-                              padding: '5px 20px'
+                          {
+                              "type":"ring",
+                              "height":"70%",
+                              "width":"30%",
+                              "x":"72%",
+                              "y":"10%",
+                              "title":{
+                                "text":"Lesson Progress"
+                              },
+                              "plot":{
+                                "value-box":{
+                                  "text":"<h3>"+ vm.userData.lessonCompleted+" </> <br/> lessons completed",
+                                  "placement":"center",
+                                  "font-color":"black",
+                                  "font-size":25,
+                                  "font-family":"Georgia",
+                                  "font-weight":"normal",
+                                  "rules":[
+                                    {
+                                      "rule":"%p != 0",
+                                      "visible":false
+                                    }
+                                  ]
+                                },
+                                "tooltip":{
+                                  "text":"%t: %v (%npv%)",
+                                  "font-color":"black",
+                                  "font-family":"Georgia",
+                                  "text-alpha":1,
+                                  "background-color":"white",
+                                  "alpha":0.7,
+                                  "border-width":1,
+                                  "border-color":"#cccccc",
+                                  "line-style":"dotted",
+                                  "border-radius":"10px",
+                                  "padding":"10%",
+                                  "placement":"node:center"
+                                },
+                                "slice":"50%",
+                                "border-width":1,
+                                "border-color":"#cccccc",
+                                "line-style":"dotted"
+                              },
+                              "plotarea":{
+                                "margin-top":"12%"
+                              },
+                              "series":[
+                                {
+                                  "values":[(3-vm.userData.lessonCompleted)],
+                                  "slice":"80%",
+                                  "text":"Remaining",
+                                  "background-color":"#C5DEFD",
+                                      "border-width":"0px",
+                                },
+                                {
+                                  "values":[vm.userData.lessonCompleted],
+                                  "slice":"80%",
+                                  "text":"Completed",
+                                           "background-color":"#85a1af",
+                                      "alpha":"0.5",
+                                      "border-color":"#85a1af",
+                                      "border-width":"1px",
+                                      "shadow":0
+                                }
+                              ]
                             }
-                          },
-                          scaleY: {
-                            values: '0:20:5',
-                            label: {
-                              text: 'Daily Score',
-                              backgroundColor: '#e7e7ff',
-                              borderColor: 'green',
-                              borderRadius: 3,
-                              borderWidth: 1,
-                              fontColor: 'green',
-                              fontFamily: 'Georgia',
-                              fontSize: 16,
-                              fontStyle: 'normal',
-                              fontWeight: 'normal',
-                              padding: '3px 20px'
-                            }
-                          },
-                          series: [{
-                            values: scoresArray,
-                          }]
-                        }
-                    });
+                      ]
+                  };
+                 
+                  zingchart.render({ 
+                      id : 'myChart', 
+                      data : myConfig, 
+                  });
+
+
                 }
+
 
                 function updateMonthlyRoutine(event, data) {
                     vm.monthlyRoutine.push({
