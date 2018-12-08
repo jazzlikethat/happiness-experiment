@@ -13,14 +13,6 @@
                                 <div class="logout">
                                     <a href="#!/login">Logout</a>
                                 </div>
-                                <div class="image-container">
-                                    <img src={{vm.userData.profilePicture}} id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
-                                    <div class="middle">
-                                        <!-- <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change Photo" />
-                                        <input type="file" style="display: none;" id="profilePicture" name="file" /> -->
-                                      
-                                    </div>
-                                </div>
                                 <div class="userData ml-3">
                                     <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a href="javascript:void(0);">{{vm.userData.fName + ' ' + vm.userData.lName}}</a></h2>
                                     <h6 class="d-block"><a href="javascript:void(0)">{{vm.userData.lessonResponses.length }}</a> Lessons Completed</h6>
@@ -111,15 +103,6 @@
                                             </div>
                                             <div class="col-md-8 col-6">
                                                  <input type="text" placeholder="User Name" ng-model="vm.userID" class="form-control">
-                                            </div>
-                                    </div>
-                                    <hr />
-                                    <div class="row">
-                                            <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">Change Photo</label>
-                                            </div>
-                                            <div class="col-md-8 col-6">
-                                                <input id="Upload photo" name="Upload photo" class="input-file" type="file">
                                             </div>
                                     </div>
                                      <hr />
